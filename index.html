@@ -115,6 +115,14 @@
   /* ---------- Extras: language, 4-up HUD, sim note, terminal ---------- */
   :root { --term-bg:#0F141B; --term-fg:#D8DEE6; --term-mut:#8391A3; --term-rule:#2A3443; --term-buy:#FF8A4C; --term-sell:#3FCB92; --term-warn:#FFC266; --term-bad:#FF7B89; --term-info:#7FB2FF; }
   @media (max-width: 899px) { .lead { margin-bottom: 10rem; } }
+  @media (max-width: 34rem) { .lead { margin-bottom: 12rem; font-size: 1rem; } }
+  #menuBtn { display: none; padding: 0.3rem 0.5rem; place-items: center; line-height: 0; }
+  #menuBtn svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .mnav { display: flex; flex-direction: column; padding-block: 0 0.75rem; }
+  .mnav[hidden] { display: none; }
+  .mnav a { padding-block: 0.7rem; font-family: var(--display); font-weight: 700; font-size: 1.25rem; color: var(--ink); text-decoration: none; border-top: 1px solid var(--rule); }
+  @media (max-width: 44rem) { #menuBtn { display: inline-grid; } }
+  @media (min-width: 44.01rem) { .mnav { display: none; } }
   #langBtn { padding: 0.3rem 0.7rem; font-size: 0.85rem; min-width: 2.9rem; }
   .hud { flex-wrap: wrap; gap: 0.5rem 1.4rem; }
   .hud dd { font-variant-numeric: tabular-nums; min-width: 5ch; }
@@ -188,7 +196,7 @@
   .log li { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.3rem; }
   .log .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; flex: none; transform: translateY(-1px); }
 
-  /* ---------- Building with AI ---------- */
+  /* ---------- Development with AI ---------- */
   .ai-grid { display: grid; gap: 1.25rem; margin-bottom: 1.5rem; }
   @media (min-width: 52rem) { .ai-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
   .ai-card { background: var(--panel); border: 2px solid var(--ink); border-radius: 14px; padding: 1.25rem; }
@@ -324,8 +332,16 @@
       <a href="#contact">Contact</a>
       <button type="button" id="langBtn" aria-label="Switch language">CZ</button>
       <button type="button" id="themeBtn" aria-label="Switch to light theme"></button>
+      <button type="button" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </nav>
   </header>
+  <nav class="mnav" id="mnav" aria-label="Main" hidden>
+    <a href="#now">Aiviro</a>
+    <a href="#path">Experience</a>
+    <a href="#ai">AI</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </div>
 
 <main id="top">
@@ -336,7 +352,7 @@
     <div class="wrap hero-inner">
       <p class="role">Python developer · RPA, AI automation and trading systems</p>
       <h1>Ondřej<br>Zelík</h1>
-      <p class="lead">I design, build and run Python systems in production. At Aiviro I develop RPA and LLM automation that processes business documents for enterprise customers; outside of work I build my own automated trading and DeFi systems. From architecture and code to deployment and support.</p>
+      <p class="lead">I design, build and operate Python systems in production. At Aiviro, I develop RPA and LLM-based automation that processes business documents for enterprise clients. Outside work, I build automated trading and DeFi systems. I cover the full lifecycle, from architecture and code to deployment and support.</p>
 
       <div class="hero-bottom">
         <dl class="hud panel-glass" aria-live="off">
@@ -349,10 +365,10 @@
           <div class="modes" role="group" aria-label="Simulation">
             <button type="button" data-mode="order" aria-pressed="true">Limit order bot</button>
             <button type="button" data-mode="lp" aria-pressed="false">Liquidity range bot</button>
-            <button type="button" id="shake">Shake the price</button>
+            <button type="button" id="shake">Add volatility</button>
           </div>
           <p id="hint"></p>
-          <p class="sim-note">Illustration only. This is not my actual strategy, which is far more complex. It is an interactive element, and all profit figures are made up.</p>
+          <p class="sim-note">Illustration only, not an actual trading strategy; the real systems are considerably more complex. All profit figures are fictional.</p>
         </div>
       </div>
     </div>
@@ -362,33 +378,33 @@
 
     <!-- NOW -->
     <section id="now" class="now" aria-labelledby="now-h">
-      <p class="role">Python Integrator at Aiviro s.r.o., since January 2026</p>
+      <p class="role">Python Integrator, Aiviro s.r.o., since January 2026</p>
       <h2 id="now-h">What I do now</h2>
-      <p class="now-lead">I build AI-driven automation for enterprise customers: systems that take in business documents, understand them with language models, check the result and pass clean data into company software. My work covers the whole path, from the first prompt to keeping it running in production.</p>
+      <p class="now-lead">I develop AI-driven automation for enterprise clients: systems that ingest business documents, interpret them with language models, validate the results and deliver clean data to business systems. I cover the full lifecycle, from prompt design to production operation and support.</p>
 
       <div class="pipe" id="pipe">
         <div class="pipe-bar">
-          <strong>How a document automation flows</strong>
+          <strong>How automated document processing works</strong>
           <div class="btns">
-            <button type="button" class="primary" id="runClean">Run a valid document</button>
-            <button type="button" id="runTricky">Run a document with an error</button>
+            <button type="button" class="primary" id="runClean">Process a valid document</button>
+            <button type="button" id="runTricky">Process a document with an error</button>
           </div>
         </div>
         <ol class="pipe-steps" role="tablist" aria-label="Stages of an automation">
-          <li><button type="button" role="tab" id="t0" aria-controls="pipePanel" aria-selected="true" data-i="0"><span class="n">1</span>Take in</button></li>
-          <li><button type="button" role="tab" id="t1" aria-controls="pipePanel" aria-selected="false" data-i="1"><span class="n">2</span>Understand</button></li>
-          <li><button type="button" role="tab" id="t2" aria-controls="pipePanel" aria-selected="false" data-i="2"><span class="n">3</span>Check</button></li>
-          <li><button type="button" role="tab" id="t3" aria-controls="pipePanel" aria-selected="false" data-i="3"><span class="n">4</span>Hand off</button></li>
-          <li><button type="button" role="tab" id="t4" aria-controls="pipePanel" aria-selected="false" data-i="4"><span class="n">5</span>Run and support</button></li>
+          <li><button type="button" role="tab" id="t0" aria-controls="pipePanel" aria-selected="true" data-i="0"><span class="n">1</span>Intake</button></li>
+          <li><button type="button" role="tab" id="t1" aria-controls="pipePanel" aria-selected="false" data-i="1"><span class="n">2</span>Extraction</button></li>
+          <li><button type="button" role="tab" id="t2" aria-controls="pipePanel" aria-selected="false" data-i="2"><span class="n">3</span>Validation</button></li>
+          <li><button type="button" role="tab" id="t3" aria-controls="pipePanel" aria-selected="false" data-i="3"><span class="n">4</span>Hand-off</button></li>
+          <li><button type="button" role="tab" id="t4" aria-controls="pipePanel" aria-selected="false" data-i="4"><span class="n">5</span>Operations</button></li>
         </ol>
         <div class="detour" id="detour" hidden></div>
         <div class="support" id="support" hidden>
-          <p class="support-title">Support: what I do when a process fails</p>
+          <p class="support-title">Support workflow when a process fails</p>
           <ol class="support-steps">
             <li><span class="n">A</span><span>Error report</span></li>
             <li><span class="n">B</span><span>Service Desk</span></li>
-            <li><span class="n">C</span><span>Logs and analysis</span></li>
-            <li><span class="n">D</span><span>Fix deployed</span></li>
+            <li><span class="n">C</span><span>Log analysis</span></li>
+            <li><span class="n">D</span><span>Fix deployment</span></li>
           </ol>
         </div>
         <div class="pipe-panel" id="pipePanel" role="tabpanel" aria-labelledby="t0">
@@ -401,13 +417,13 @@
         </div>
       </div>
 
-      <p class="conf">A general picture of the kind of work, not a copy of any product. Customer projects, code and product details stay confidential.</p>
+      <p class="conf">A general illustration of the type of work, not a replica of any product. Client projects, code and product details are confidential.</p>
     </section>
 
     <!-- PATH -->
     <section id="path" aria-labelledby="path-h">
-      <h2 id="path-h">Experience</h2>
-      <p class="intro">Where I have written code, from the first experiments to today.</p>
+      <h2 id="path-h">Professional experience</h2>
+      <p class="intro">An overview of my programming experience, from early projects to the present.</p>
 
       <ol class="timeline" id="timeline">
         <li class="tl" data-kind="code">
@@ -415,39 +431,39 @@
           <div class="card">
             <h3>Python Integrator</h3>
             <p class="org">Aiviro s.r.o.</p>
-            <p>AI-driven automation for enterprise customers. More in the section above.</p>
+            <p>AI-driven automation for enterprise clients. Details in the section above.</p>
           </div>
         </li>
         <li class="tl" data-kind="code">
           <span class="yr">2023</span>
           <div class="card">
-            <h3>Programmer, Perl and Python</h3>
-            <p class="org">GATEMA PCB a.s., 2023 to 2025</p>
-            <p>Maintained and extended a proprietary Perl codebase of more than 450,000 lines for printed circuit board production. Built production scripts, GUI applications and database interfaces, automated workflows around Helios Nephrite ERP and InCAM Pro, and improved logging and output control.</p>
+            <h3>Programmer (Perl, Python)</h3>
+            <p class="org">GATEMA PCB a.s., 2023–2025</p>
+            <p>Maintained and extended a proprietary Perl codebase of more than 450,000 lines for printed circuit board manufacturing. Developed production scripts, GUI applications and database interfaces, automated processes around Helios Nephrite ERP and InCAM Pro, and improved logging and output control.</p>
           </div>
         </li>
         <li class="tl" data-kind="code">
           <span class="yr">2022</span>
           <div class="card">
-            <h3>Own projects alongside work</h3>
-            <p class="org">Ongoing since 2022</p>
-            <p>Logistics tools, a trading bot with Pine Script strategies, and later multithreaded and async bots on Solana and LLM decision systems. See the projects below.</p>
+            <h3>Independent projects</h3>
+            <p class="org">Since 2022</p>
+            <p>Logistics tools, a trading bot with Pine Script strategies, and later multithreaded, asynchronous systems on Solana and LLM-based decision systems. Details in the Projects section.</p>
           </div>
         </li>
         <li class="tl" data-kind="code">
           <span class="yr">2022</span>
           <div class="card">
             <h3>Trading internship in Montenegro</h3>
-            <p class="org">Two weeks with the founder of WhaleZone – CJ Fund</p>
-            <p>Developed trading strategies together with a fundamental trader and mentor.</p>
+            <p class="org">Two-week internship with the founder of WhaleZone – CJ Fund</p>
+            <p>Developed trading strategies under the guidance of a fundamental trader and mentor.</p>
           </div>
         </li>
         <li class="tl" data-kind="code">
           <span class="yr">2017</span>
           <div class="card">
-            <h3>First steps in game development</h3>
-            <p class="org">Self-taught, with a mentor from an indie studio</p>
-            <p>Worked on a small game in Unity and on level design, and built the first version of this portfolio.</p>
+            <h3>Early work in game development</h3>
+            <p class="org">Self-study with a mentor from an independent game studio</p>
+            <p>Worked on a small Unity game and on level design; also built the first version of this portfolio.</p>
           </div>
         </li>
       </ol>
@@ -455,25 +471,25 @@
 
     <!-- AI -->
     <section id="ai" aria-labelledby="ai-h">
-      <h2 id="ai-h">Building with AI</h2>
-      <p class="intro">AI is part of what I build and of how I build it. I learned to program by hand before AI assistants were practical, which is what lets me direct them, understand what they produce and take responsibility for it.</p>
+      <h2 id="ai-h">Development with AI</h2>
+      <p class="intro">AI is part of both what I build and how I build it. I learned to program by hand before AI assistants became practical, which allows me to direct them, understand their output and take responsibility for the result.</p>
 
       <div class="ai-grid">
         <div class="ai-card">
-          <h3>In what I build</h3>
+          <h3>AI in my solutions</h3>
           <ul>
-            <li>LLM workflows that turn unstructured documents into structured JSON.</li>
-            <li>AI decision engines that weigh data and context within clear rules.</li>
-            <li>Trading bots that pass live market data to a language model and act on a structured answer.</li>
+            <li>LLM workflows that convert unstructured documents into structured JSON.</li>
+            <li>AI decision systems that evaluate data and context within clearly defined rules.</li>
+            <li>Trading systems that pass real-time market data to a language model and act on its structured response.</li>
           </ul>
           <ul class="chips"><li class="strong">OpenAI API</li><li class="strong">Claude API</li><li>Prompt engineering</li><li>Structured outputs</li><li>OCR</li></ul>
         </div>
         <div class="ai-card">
-          <h3>In how I build</h3>
+          <h3>AI in my development process</h3>
           <ul>
-            <li>Coding agents for drafting, refactoring, tests and debugging, often several in parallel on separate tasks.</li>
-            <li>Every change has to be understood and checked against our team standards and tests before it is merged.</li>
-            <li>I set the direction and stay responsible for what goes to production.</li>
+            <li>Coding agents for drafting, refactoring, testing and debugging, often several in parallel on separate tasks.</li>
+            <li>Every change must be understood and verified against team standards and tests before it is merged.</li>
+            <li>I set the direction and remain accountable for what goes to production.</li>
           </ul>
           <ul class="chips"><li class="strong">Claude Code</li><li class="strong">GitHub Copilot</li><li>Junie</li><li>Gemini and Antigravity</li></ul>
         </div>
@@ -481,7 +497,7 @@
 
       <div class="collab" id="collab">
         <div class="collab-head">
-          <strong>How I split the work with AI agents</strong>
+          <strong>Dividing work with AI agents</strong>
           <div class="phase-tabs" role="tablist" aria-label="Phase">
             <button type="button" role="tab" aria-selected="true" data-ph="0">Plan</button>
             <button type="button" role="tab" aria-selected="false" data-ph="1">Build in parallel</button>
@@ -491,19 +507,19 @@
           </div>
         </div>
         <div class="thread" id="thread" role="tabpanel" aria-live="polite"></div>
-        <p class="collab-foot">An illustration of the working pattern, not a real transcript.</p>
+        <p class="collab-foot">An illustration of the workflow, not an actual transcript.</p>
       </div>
     </section>
 
     <!-- WORK -->
     <section id="work" aria-labelledby="work-h">
       <h2 id="work-h">Projects</h2>
-      <p class="intro">Side projects from the last four years. The early ones were written by hand in 2022 and early 2023, before AI coding assistants were part of everyday work, and they are where most of my Python fundamentals come from.</p>
+      <p class="intro">Independent projects from the past four years. The earliest were written by hand in 2022 and early 2023, before AI coding assistants became widespread, and they are where I built most of my Python fundamentals.</p>
 
       <div class="group">
         <div class="group-head">
           <h3>Trading and DeFi</h3>
-          <p>Systems that read the market and act on it. Both current bots run on Solana as multithreaded, asynchronous Python applications working with live data streams. Strategy details stay private.</p>
+          <p>Systems that monitor the market and act on it. Both current systems run on Solana as multithreaded, asynchronous Python applications processing live data streams. Strategy details are confidential.</p>
         </div>
 
         <details class="proj" name="p" open>
@@ -512,9 +528,9 @@
             <span class="meta"><span class="badge live">Current</span><span class="badge">Cloud, 24/7</span><span>Python, asyncio, Solana</span></span>
           </summary>
           <div class="body">
-            <p>My most recent bot. It manages concentrated liquidity positions and works to limit their exposure to price moves, deciding when a position should be adjusted and when to leave it alone.</p>
-            <p>It runs autonomously 24/7 on a cloud Linux server, where it moved from an on-premise machine. Next to the trading logic, the project covers deployment and stable unattended operation.</p>
-            <p class="note">The logic is private, so there is no public source.</p>
+            <p>My most recent system. It manages concentrated liquidity positions, limits their exposure to price movements and determines when a position should be adjusted and when to leave it unchanged.</p>
+            <p>It runs autonomously 24/7 on a cloud Linux server after migrating from an on-premise machine. In addition to the trading logic, the project covers deployment and stable unattended operation.</p>
+            <p class="note">The logic is proprietary, so the source code is not public.</p>
           </div>
         </details>
 
@@ -524,27 +540,27 @@
             <span class="meta"><span class="badge live">Active</span><span>Python, Solana</span></span>
           </summary>
           <div class="body">
-            <p>A liquidity provision bot for the USDC/USDT stablecoin pair. It manages a concentrated liquidity (CLMM) position, and because both tokens are stablecoins, the price risk is much lower than with volatile pairs. Written entirely in Python. The "Liquidity range bot" mode in the chart at the top of the page shows the general principle.</p>
+            <p>A liquidity provision bot for the USDC/USDT stablecoin pair. It manages a concentrated liquidity (CLMM) position; since both tokens are stablecoins, price risk is significantly lower than with volatile pairs. Written entirely in Python. The "Liquidity range bot" mode at the top of the page illustrates the general principle.</p>
           </div>
         </details>
 
         <details class="proj" name="p">
           <summary>
-            <h4>LLM decision bots</h4>
+            <h4>LLM decision systems</h4>
             <span class="meta"><span>Python, OpenAI and Claude APIs</span></span>
           </summary>
           <div class="body">
-            <p>Bots that pass live indicator data and market context to a language model, get a structured decision back and execute it automatically.</p>
+            <p>Systems that pass real-time indicator data and market context to a language model, receive a structured decision and execute it automatically.</p>
           </div>
         </details>
 
         <details class="proj" name="p">
           <summary>
-            <h4>Allrounder trading bot</h4>
+            <h4>Allrounder trading system</h4>
             <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, Pine Script, Gmail</span></span>
           </summary>
           <div class="body">
-            <p>A scalping strategy for 5 to 15 minute charts, written in Pine Script on TradingView. Signals arrive by e-mail; the Python engine parses them, places a limit order, leaves it in the order book while the price is good and re-prices it when the market moves. The "Limit order bot" mode at the top of the page is this loop.</p>
+            <p>A scalping strategy for 5–15 minute charts, written in Pine Script on TradingView. Signals arrive by e-mail; the Python engine parses them, places a limit order, keeps it in the order book while the price remains favourable and re-prices it as the market moves. The "Limit order bot" mode at the top of the page illustrates this loop.</p>
             <p class="links">
               <a href="https://github.com/Ex4m/Exchange-limit-order-auto-trading-engine-bot-">Source on GitHub</a>
               <a href="https://www.tradingview.com/script/XyUayR9K-ALLROUNDER/">Strategy on TradingView</a>
@@ -554,11 +570,11 @@
 
         <details class="proj" name="p">
           <summary>
-            <h4>Web page scoring bot for Telegram</h4>
+            <h4>Web page scoring with Telegram output</h4>
             <span class="meta"><span>Python, AI API, Telegram</span></span>
           </summary>
           <div class="body">
-            <p>Uses an AI API to score web pages and posts the results to a Telegram channel.</p>
+            <p>Scores web pages via an AI API and publishes the results to a Telegram channel.</p>
           </div>
         </details>
       </div>
@@ -566,7 +582,7 @@
       <div class="group">
         <div class="group-head">
           <h3>Logistics tools</h3>
-          <p>Written to save time in my logistics job.</p>
+          <p>Built to streamline my work in logistics.</p>
         </div>
 
         <details class="proj" name="p">
@@ -575,29 +591,29 @@
             <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, PDF parsing, Excel</span></span>
           </summary>
           <div class="body">
-            <p>Reads a specific type of PDF invoice, extracts the key data and fills it into a predefined Excel packing list. Packaging dimensions are entered quickly, so a complete packing list takes minutes instead of manual retyping. A related tool turns invoices into price lists.</p>
+            <p>Reads a specific type of PDF invoice, extracts the key data and populates a predefined Excel packing list template. Packaging dimensions are entered quickly, so a complete packing list takes minutes instead of manual retyping. A related tool converts invoices into price lists.</p>
             <p class="links"><a href="https://github.com/Ex4m/Invoice-to-packing-list-convertor">Source on GitHub</a></p>
           </div>
         </details>
 
         <details class="proj" name="p">
           <summary>
-            <h4>Customs code (HS) finder</h4>
+            <h4>Customs code (HS) lookup</h4>
             <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, web scraping</span></span>
           </summary>
           <div class="body">
-            <p>Collects HS codes that were actually used in export and import, cleans them into a local database, and finds the best match for a product description, so people without customs knowledge can find a code.</p>
+            <p>Collects HS codes actually used in exports and imports, cleans them into a local database and finds the best match for a product description, so users without customs expertise can identify the correct code.</p>
             <p class="links"><a href="https://github.com/Ex4m/Customs-Nomenclature-Identifier">Source on GitHub</a></p>
           </div>
         </details>
 
         <details class="proj" name="p">
           <summary>
-            <h4>Quick volume calculator</h4>
+            <h4>Quick Volume Calculator</h4>
             <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, pandas</span></span>
           </summary>
           <div class="body">
-            <p>Calculates volume and volumetric weight, stores rows in a pandas DataFrame, exports to CSV or Excel and predicts whether a package is a pallet or a carton. A simplified version runs <a href="#calc">further down this page</a>.</p>
+            <p>Calculates volume and volumetric weight, stores entries in a pandas DataFrame, exports to CSV or Excel and determines whether a package is a pallet or a carton. A simplified version is available <a href="#calc">further down this page</a>.</p>
             <p class="links"><a href="https://github.com/Ex4m/Quick-Volume-Calculator">Source on GitHub</a></p>
           </div>
         </details>
@@ -605,7 +621,7 @@
 
       <div class="group">
         <div class="group-head">
-          <h3>Desktop apps and learning</h3>
+          <h3>Desktop applications and study projects</h3>
         </div>
 
         <details class="proj" name="p">
@@ -614,29 +630,29 @@
             <span class="meta"><span>Python, GUI, OOP</span></span>
           </summary>
           <div class="body">
-            <p>Two small desktop utilities: one for closing applications quickly, one for switching audio outputs. Built with an object-oriented structure.</p>
+            <p>Two small desktop utilities: one for quickly closing applications, one for switching audio outputs. Built using object-oriented design.</p>
             <p class="links"><a href="https://github.com/Ex4m/AppKiller">AppKiller on GitHub</a><a href="https://github.com/Ex4m/Audio_switch">AudioSwitch on GitHub</a></p>
           </div>
         </details>
 
         <details class="proj" name="p">
           <summary>
-            <h4>Self-training chatbot</h4>
+            <h4>Self-learning chatbot</h4>
             <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, neural network</span></span>
           </summary>
           <div class="body">
-            <p>A chatbot on a deep neural network. Wrong answers can be corrected during the chat, and the network retrains after a restart.</p>
+            <p>A chatbot based on a deep neural network. Incorrect answers can be corrected during the conversation, and the network retrains after a restart.</p>
             <p class="links"><a href="https://github.com/Ex4m/Simple-AI-deep-learning-DNN-chatbot">Source on GitHub</a></p>
           </div>
         </details>
 
         <details class="proj" name="p">
           <summary>
-            <h4>NumPy basics trainer</h4>
+            <h4>NumPy study tool</h4>
             <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, NumPy</span></span>
           </summary>
           <div class="body">
-            <p>A study tool that walks through NumPy code blocks with my own notes.</p>
+            <p>A study aid that walks through NumPy code examples with my own annotations.</p>
             <p class="links"><a href="https://github.com/Ex4m/Numpy-basics-trainer">Source on GitHub</a></p>
           </div>
         </details>
@@ -645,8 +661,8 @@
 
     <!-- CALC -->
     <section id="calc" aria-labelledby="calc-h">
-      <h2 id="calc-h">Try one of my tools</h2>
-      <p class="intro">A simplified version of my Quick Volume Calculator. Drag the sliders: it works out the total volume, the total weight and the volumetric weight, and decides whether the piece is a pallet or a carton.</p>
+      <h2 id="calc-h">Tool demo</h2>
+      <p class="intro">A simplified version of my Quick Volume Calculator. Set the dimensions with the sliders to calculate the total volume, total weight and volumetric weight, and to determine whether the item is a pallet or a carton.</p>
 
       <div class="calc">
         <div>
@@ -662,7 +678,7 @@
             <div class="hi"><dt>Volumetric weight</dt><dd id="rVolKg">-</dd></div>
             <div><dt>Packing</dt><dd id="rType">-</dd></div>
           </dl>
-          <p class="calc-note"><span id="verdict"></span> <span>As in the original tool, volumetric weight uses the 167 kg per m³ standard, and a piece counts as a pallet when its base is at least 80 × 60 cm.</span></p>
+          <p class="calc-note"><span id="verdict"></span> <span>As in the original tool, volumetric weight is calculated using the 167 kg per m³ standard, and an item is classified as a pallet if its base is at least 80 × 60 cm.</span></p>
         </div>
         <div class="box-wrap">
           <svg id="boxSvg" viewBox="0 0 400 400" role="img" aria-label="Package drawn to scale">
@@ -678,8 +694,8 @@
 
     <!-- SKILLS -->
     <section id="skills" aria-labelledby="skills-h">
-      <h2 id="skills-h">Toolbox</h2>
-      <p class="intro">What I use day to day, and what I have worked with before.</p>
+      <h2 id="skills-h">Technologies</h2>
+      <p class="intro">Tools I use daily and technologies I have worked with previously.</p>
       <div class="skills">
         <div>
           <h3>Languages</h3>
@@ -719,9 +735,9 @@
         <div>
           <h2 id="about-h">About</h2>
           <div class="prose">
-            <p>I have been curious about how computers work for as long as I can remember. Before programming I spent seven years in international transport and purchasing, after a master's degree in transport management. My first scripts were written to take the repetitive parts out of that work.</p>
-            <p>In 2023 I moved to programming full time. I now work on AI automation in Python, and in my own time I build trading and DeFi bots.</p>
-            <p>English at B2 level, Czech native.</p>
+            <p>Computers and how they work have interested me for a long time. After a master's degree in transport management, I spent seven years in international transport and purchasing. I wrote my first scripts to automate repetitive tasks in that work.</p>
+            <p>In 2023, I moved into programming full time. I currently focus on AI automation in Python and, in my spare time, develop trading and DeFi systems.</p>
+            <p>English (B2), Czech (native).</p>
           </div>
         </div>
         <div>
@@ -755,103 +771,96 @@
  "Switch language": "Přepnout jazyk",
  "Simulated price chart with a trading bot reacting to the price": "Simulovaný cenový graf s obchodním botem reagujícím na cenu",
  "Python developer · RPA, AI automation and trading systems": "Python vývojář · RPA, AI automatizace a obchodní systémy",
- "I design, build and run Python systems in production. At Aiviro I develop RPA and LLM automation that processes business documents for enterprise customers; outside of work I build my own automated trading and DeFi systems. From architecture and code to deployment and support.": "Navrhuji, vyvíjím a provozuji systémy v Pythonu. Ve společnosti Aiviro vyvíjím RPA a LLM automatizace pro zpracování obchodních dokumentů firemních zákazníků; mimo zaměstnání se věnuji vlastním automatizovaným obchodním a DeFi systémům. Od architektury a kódu po nasazení a podporu.",
+ "I design, build and operate Python systems in production. At Aiviro, I develop RPA and LLM-based automation that processes business documents for enterprise clients. Outside work, I build automated trading and DeFi systems. I cover the full lifecycle, from architecture and code to deployment and support.": "Navrhuji, vyvíjím a provozuji systémy v Pythonu. Ve společnosti Aiviro vyvíjím RPA a LLM automatizace pro zpracování obchodních dokumentů firemních zákazníků; mimo zaměstnání se věnuji vlastním automatizovaným obchodním a DeFi systémům. Od architektury a kódu po nasazení a podporu.",
  "Simulation": "Simulace",
  "Limit order bot": "Bot s limitními příkazy",
  "Liquidity range bot": "Bot likviditního rozsahu",
- "Shake the price": "Rozhýbat cenu",
- "Illustration only. This is not my actual strategy, which is far more complex. It is an interactive element, and all profit figures are made up.": "Pouze ilustrace, nikoli skutečná strategie, která je výrazně složitější. Všechny uvedené hodnoty zisku jsou smyšlené.",
- "Python Integrator at Aiviro s.r.o., since January 2026": "Python Integrator, Aiviro s.r.o., od ledna 2026",
+ "Add volatility": "Rozhýbat cenu",
+ "Illustration only, not an actual trading strategy; the real systems are considerably more complex. All profit figures are fictional.": "Pouze ilustrace, nikoli skutečná strategie, která je výrazně složitější. Všechny uvedené hodnoty zisku jsou smyšlené.",
+ "Python Integrator, Aiviro s.r.o., since January 2026": "Python Integrator, Aiviro s.r.o., od ledna 2026",
  "What I do now": "Současné zaměstnání",
- "I build AI-driven automation for enterprise customers: systems that take in business documents, understand them with language models, check the result and pass clean data into company software. My work covers the whole path, from the first prompt to keeping it running in production.": "Vyvíjím AI automatizace pro firemní zákazníky: systémy, které přijímají obchodní dokumenty, zpracovávají je pomocí jazykových modelů, ověřují výsledky a předávají čistá data do podnikových systémů. Pokrývám celý životní cyklus, od návrhu promptů po provoz a podporu v produkci.",
- "How a document automation flows": "Jak probíhá automatizované zpracování dokumentu",
- "Run a valid document": "Zpracovat bezchybný dokument",
- "Run a document with an error": "Zpracovat dokument s chybou",
+ "I develop AI-driven automation for enterprise clients: systems that ingest business documents, interpret them with language models, validate the results and deliver clean data to business systems. I cover the full lifecycle, from prompt design to production operation and support.": "Vyvíjím AI automatizace pro firemní zákazníky: systémy, které přijímají obchodní dokumenty, zpracovávají je pomocí jazykových modelů, ověřují výsledky a předávají čistá data do podnikových systémů. Pokrývám celý životní cyklus, od návrhu promptů po provoz a podporu v produkci.",
+ "How automated document processing works": "Jak probíhá automatizované zpracování dokumentu",
+ "Process a valid document": "Zpracovat bezchybný dokument",
+ "Process a document with an error": "Zpracovat dokument s chybou",
  "Stages of an automation": "Fáze automatizace",
- "<span class=\"n\">1</span>Take in": "<span class=\"n\">1</span>Příjem",
- "<span class=\"n\">2</span>Understand": "<span class=\"n\">2</span>Porozumění",
- "<span class=\"n\">3</span>Check": "<span class=\"n\">3</span>Kontrola",
- "<span class=\"n\">4</span>Hand off": "<span class=\"n\">4</span>Předání",
- "<span class=\"n\">5</span>Run and support": "<span class=\"n\">5</span>Provoz a podpora",
- "Support: what I do when a process fails": "Podpora: postup při selhání procesu",
+ "Support workflow when a process fails": "Podpora: postup při selhání procesu",
  "Error report": "Chybový report",
- "Logs and analysis": "Logy a analýza",
- "Fix deployed": "Nasazení opravy",
- "A general picture of the kind of work, not a copy of any product. Customer projects, code and product details stay confidential.": "Jde o obecnou ilustraci typu práce, nikoli o kopii konkrétního produktu. Zákaznické projekty, kód a detaily produktů jsou důvěrné.",
- "Where I have written code, from the first experiments to today.": "Přehled mé programátorské praxe od prvních projektů po současnost.",
- "AI-driven automation for enterprise customers. More in the section above.": "AI automatizace pro firemní zákazníky. Podrobnosti v sekci výše.",
- "Programmer, Perl and Python": "Programátor (Perl, Python)",
- "GATEMA PCB a.s., 2023 to 2025": "GATEMA PCB a.s., 2023–2025",
- "Maintained and extended a proprietary Perl codebase of more than 450,000 lines for printed circuit board production. Built production scripts, GUI applications and database interfaces, automated workflows around Helios Nephrite ERP and InCAM Pro, and improved logging and output control.": "Údržba a rozvoj proprietárního systému v Perlu o rozsahu přes 450 000 řádků pro výrobu desek plošných spojů. Vývoj produkčních skriptů, GUI aplikací a databázových rozhraní, automatizace procesů kolem ERP Helios Nephrite a InCAM Pro, zlepšení logování a kontroly výstupů.",
- "Own projects alongside work": "Vlastní projekty",
- "Ongoing since 2022": "Od roku 2022",
- "Logistics tools, a trading bot with Pine Script strategies, and later multithreaded and async bots on Solana and LLM decision systems. See the projects below.": "Nástroje pro logistiku, obchodní bot se strategiemi v Pine Scriptu, později vícevláknové a asynchronní systémy na Solaně a rozhodovací systémy využívající LLM. Podrobnosti v sekci Projekty.",
+ "A general illustration of the type of work, not a replica of any product. Client projects, code and product details are confidential.": "Jde o obecnou ilustraci typu práce, nikoli o kopii konkrétního produktu. Zákaznické projekty, kód a detaily produktů jsou důvěrné.",
+ "An overview of my programming experience, from early projects to the present.": "Přehled mé programátorské praxe od prvních projektů po současnost.",
+ "AI-driven automation for enterprise clients. Details in the section above.": "AI automatizace pro firemní zákazníky. Podrobnosti v sekci výše.",
+ "Programmer (Perl, Python)": "Programátor (Perl, Python)",
+ "GATEMA PCB a.s., 2023–2025": "GATEMA PCB a.s., 2023–2025",
+ "Maintained and extended a proprietary Perl codebase of more than 450,000 lines for printed circuit board manufacturing. Developed production scripts, GUI applications and database interfaces, automated processes around Helios Nephrite ERP and InCAM Pro, and improved logging and output control.": "Údržba a rozvoj proprietárního systému v Perlu o rozsahu přes 450 000 řádků pro výrobu desek plošných spojů. Vývoj produkčních skriptů, GUI aplikací a databázových rozhraní, automatizace procesů kolem ERP Helios Nephrite a InCAM Pro, zlepšení logování a kontroly výstupů.",
+ "Independent projects": "Vlastní projekty",
+ "Since 2022": "Od roku 2022",
+ "Logistics tools, a trading bot with Pine Script strategies, and later multithreaded, asynchronous systems on Solana and LLM-based decision systems. Details in the Projects section.": "Nástroje pro logistiku, obchodní bot se strategiemi v Pine Scriptu, později vícevláknové a asynchronní systémy na Solaně a rozhodovací systémy využívající LLM. Podrobnosti v sekci Projekty.",
  "Trading internship in Montenegro": "Obchodní stáž v Černé Hoře",
- "Two weeks with the founder of WhaleZone – CJ Fund": "Dvoutýdenní stáž u zakladatele WhaleZone – CJ Fund",
- "Developed trading strategies together with a fundamental trader and mentor.": "Vývoj obchodních strategií pod vedením fundamentálního tradera a mentora.",
- "First steps in game development": "Začátky ve vývoji her",
- "Self-taught, with a mentor from an indie studio": "Samostudium s mentorem z nezávislého herního studia",
- "Worked on a small game in Unity and on level design, and built the first version of this portfolio.": "Práce na menší hře v Unity a na level designu; vznikla také první verze tohoto portfolia.",
- "Building with AI": "Vývoj s využitím AI",
- "AI is part of what I build and of how I build it. I learned to program by hand before AI assistants were practical, which is what lets me direct them, understand what they produce and take responsibility for it.": "AI je součástí toho, co vyvíjím, i toho, jak vyvíjím. Programovat jsem se naučil ručně ještě před nástupem AI asistentů, a díky tomu je dokážu řídit, rozumím tomu, co vytvoří, a nesu za výsledek odpovědnost.",
- "In what I build": "AI v mých řešeních",
- "LLM workflows that turn unstructured documents into structured JSON.": "LLM workflow, která převádějí nestrukturované dokumenty na strukturovaný JSON.",
- "AI decision engines that weigh data and context within clear rules.": "Rozhodovací systémy s AI, které vyhodnocují data a kontext v rámci jasně daných pravidel.",
- "Trading bots that pass live market data to a language model and act on a structured answer.": "Obchodní systémy, které předávají aktuální tržní data jazykovému modelu a jednají podle jeho strukturované odpovědi.",
+ "Two-week internship with the founder of WhaleZone – CJ Fund": "Dvoutýdenní stáž u zakladatele WhaleZone – CJ Fund",
+ "Developed trading strategies under the guidance of a fundamental trader and mentor.": "Vývoj obchodních strategií pod vedením fundamentálního tradera a mentora.",
+ "Early work in game development": "Začátky ve vývoji her",
+ "Self-study with a mentor from an independent game studio": "Samostudium s mentorem z nezávislého herního studia",
+ "Worked on a small Unity game and on level design; also built the first version of this portfolio.": "Práce na menší hře v Unity a na level designu; vznikla také první verze tohoto portfolia.",
+ "Development with AI": "Vývoj s využitím AI",
+ "AI is part of both what I build and how I build it. I learned to program by hand before AI assistants became practical, which allows me to direct them, understand their output and take responsibility for the result.": "AI je součástí toho, co vyvíjím, i toho, jak vyvíjím. Programovat jsem se naučil ručně ještě před nástupem AI asistentů, a díky tomu je dokážu řídit, rozumím tomu, co vytvoří, a nesu za výsledek odpovědnost.",
+ "AI in my solutions": "AI v mých řešeních",
+ "LLM workflows that convert unstructured documents into structured JSON.": "LLM workflow, která převádějí nestrukturované dokumenty na strukturovaný JSON.",
+ "AI decision systems that evaluate data and context within clearly defined rules.": "Rozhodovací systémy s AI, které vyhodnocují data a kontext v rámci jasně daných pravidel.",
+ "Trading systems that pass real-time market data to a language model and act on its structured response.": "Obchodní systémy, které předávají aktuální tržní data jazykovému modelu a jednají podle jeho strukturované odpovědi.",
  "Structured outputs": "Strukturované výstupy",
- "In how I build": "AI ve vývojovém procesu",
- "Coding agents for drafting, refactoring, tests and debugging, often several in parallel on separate tasks.": "Kódovací agenty využívám pro návrhy, refaktoring, testy a ladění, často několik souběžně na oddělených úlohách.",
- "Every change has to be understood and checked against our team standards and tests before it is merged.": "Každé změně musím porozumět a před začleněním ji ověřit podle týmových standardů a testů.",
- "I set the direction and stay responsible for what goes to production.": "Určuji směr a odpovídám za to, co jde do produkce.",
+ "AI in my development process": "AI ve vývojovém procesu",
+ "Coding agents for drafting, refactoring, testing and debugging, often several in parallel on separate tasks.": "Kódovací agenty využívám pro návrhy, refaktoring, testy a ladění, často několik souběžně na oddělených úlohách.",
+ "Every change must be understood and verified against team standards and tests before it is merged.": "Každé změně musím porozumět a před začleněním ji ověřit podle týmových standardů a testů.",
+ "I set the direction and remain accountable for what goes to production.": "Určuji směr a odpovídám za to, co jde do produkce.",
  "Gemini and Antigravity": "Gemini a Antigravity",
- "How I split the work with AI agents": "Rozdělení práce s AI agenty",
+ "Dividing work with AI agents": "Rozdělení práce s AI agenty",
  "Phase": "Fáze",
  "Plan": "Plán",
  "Build in parallel": "Souběžný vývoj",
  "Review": "Revize",
  "Test": "Testy",
  "Debug": "Ladění",
- "An illustration of the working pattern, not a real transcript.": "Ilustrace pracovního postupu, nikoli skutečný přepis.",
+ "An illustration of the workflow, not an actual transcript.": "Ilustrace pracovního postupu, nikoli skutečný přepis.",
  "Projects": "Projekty",
- "Side projects from the last four years. The early ones were written by hand in 2022 and early 2023, before AI coding assistants were part of everyday work, and they are where most of my Python fundamentals come from.": "Vlastní projekty z posledních čtyř let. Ty nejstarší jsem psal ručně v roce 2022 a na začátku roku 2023, ještě před rozšířením AI asistentů, a právě na nich jsem získal většinu základů v Pythonu.",
+ "Independent projects from the past four years. The earliest were written by hand in 2022 and early 2023, before AI coding assistants became widespread, and they are where I built most of my Python fundamentals.": "Vlastní projekty z posledních čtyř let. Ty nejstarší jsem psal ručně v roce 2022 a na začátku roku 2023, ještě před rozšířením AI asistentů, a právě na nich jsem získal většinu základů v Pythonu.",
  "Trading and DeFi": "Trading a DeFi",
- "Systems that read the market and act on it. Both current bots run on Solana as multithreaded, asynchronous Python applications working with live data streams. Strategy details stay private.": "Systémy, které sledují trh a reagují na něj. Oba aktuální systémy běží na Solaně jako vícevláknové asynchronní aplikace v Pythonu pracující s živými datovými proudy. Detaily strategií jsou neveřejné.",
+ "Systems that monitor the market and act on it. Both current systems run on Solana as multithreaded, asynchronous Python applications processing live data streams. Strategy details are confidential.": "Systémy, které sledují trh a reagují na něj. Oba aktuální systémy běží na Solaně jako vícevláknové asynchronní aplikace v Pythonu pracující s živými datovými proudy. Detaily strategií jsou neveřejné.",
  "Current": "Aktuální",
  "Cloud, 24/7": "Cloud, provoz 24/7",
  "Active": "V provozu",
- "My most recent bot. It manages concentrated liquidity positions and works to limit their exposure to price moves, deciding when a position should be adjusted and when to leave it alone.": "Můj nejnovější systém. Spravuje pozice s koncentrovanou likviditou, omezuje jejich expozici vůči pohybům ceny a vyhodnocuje, kdy pozici upravit a kdy ji ponechat beze změny.",
- "It runs autonomously 24/7 on a cloud Linux server, where it moved from an on-premise machine. Next to the trading logic, the project covers deployment and stable unattended operation.": "Běží autonomně v režimu 24/7 na cloudovém linuxovém serveru, kam byl přesunut z lokálního serveru. Součástí projektu je tak vedle obchodní logiky i nasazení a stabilní provoz bez dohledu.",
- "The logic is private, so there is no public source.": "Logika je neveřejná, zdrojový kód proto není k dispozici.",
- "A liquidity provision bot for the USDC/USDT stablecoin pair. It manages a concentrated liquidity (CLMM) position, and because both tokens are stablecoins, the price risk is much lower than with volatile pairs. Written entirely in Python. The \"Liquidity range bot\" mode in the chart at the top of the page shows the general principle.": "Bot pro poskytování likvidity na stablecoinovém páru USDC/USDT. Spravuje pozici s koncentrovanou likviditou (CLMM); protože jsou oba tokeny stablecoiny, je cenové riziko výrazně nižší než u volatilních párů. Celý je napsaný v Pythonu. Základní princip ukazuje režim „Bot likviditního rozsahu“ na začátku stránky.",
+ "My most recent system. It manages concentrated liquidity positions, limits their exposure to price movements and determines when a position should be adjusted and when to leave it unchanged.": "Můj nejnovější systém. Spravuje pozice s koncentrovanou likviditou, omezuje jejich expozici vůči pohybům ceny a vyhodnocuje, kdy pozici upravit a kdy ji ponechat beze změny.",
+ "It runs autonomously 24/7 on a cloud Linux server after migrating from an on-premise machine. In addition to the trading logic, the project covers deployment and stable unattended operation.": "Běží autonomně v režimu 24/7 na cloudovém linuxovém serveru, kam byl přesunut z lokálního serveru. Součástí projektu je tak vedle obchodní logiky i nasazení a stabilní provoz bez dohledu.",
+ "The logic is proprietary, so the source code is not public.": "Logika je neveřejná, zdrojový kód proto není k dispozici.",
+ "A liquidity provision bot for the USDC/USDT stablecoin pair. It manages a concentrated liquidity (CLMM) position; since both tokens are stablecoins, price risk is significantly lower than with volatile pairs. Written entirely in Python. The \"Liquidity range bot\" mode at the top of the page illustrates the general principle.": "Bot pro poskytování likvidity na stablecoinovém páru USDC/USDT. Spravuje pozici s koncentrovanou likviditou (CLMM); protože jsou oba tokeny stablecoiny, je cenové riziko výrazně nižší než u volatilních párů. Celý je napsaný v Pythonu. Základní princip ukazuje režim „Bot likviditního rozsahu“ na začátku stránky.",
  "AppKiller on GitHub": "AppKiller na GitHubu",
  "AudioSwitch on GitHub": "AudioSwitch na GitHubu",
- "LLM decision bots": "Rozhodovací systémy s LLM",
+ "LLM decision systems": "Rozhodovací systémy s LLM",
  "Python, OpenAI and Claude APIs": "Python, OpenAI a Claude API",
- "Bots that pass live indicator data and market context to a language model, get a structured decision back and execute it automatically.": "Systémy, které předávají jazykovému modelu aktuální data z indikátorů a kontext trhu, získají strukturované rozhodnutí a automaticky ho provedou.",
- "Allrounder trading bot": "Obchodní systém Allrounder",
+ "Systems that pass real-time indicator data and market context to a language model, receive a structured decision and execute it automatically.": "Systémy, které předávají jazykovému modelu aktuální data z indikátorů a kontext trhu, získají strukturované rozhodnutí a automaticky ho provedou.",
+ "Allrounder trading system": "Obchodní systém Allrounder",
  "Hand-written, 2022": "Psáno ručně, 2022",
- "A scalping strategy for 5 to 15 minute charts, written in Pine Script on TradingView. Signals arrive by e-mail; the Python engine parses them, places a limit order, leaves it in the order book while the price is good and re-prices it when the market moves. The \"Limit order bot\" mode at the top of the page is this loop.": "Scalpingová strategie pro 5–15minutové grafy napsaná v Pine Scriptu na TradingView. Signály přicházejí e-mailem; engine v Pythonu je zpracuje, zadá limitní příkaz, ponechá ho v knize objednávek, dokud je cena výhodná, a při pohybu trhu ho přecení. Tento princip ukazuje režim „Bot s limitními příkazy“ na začátku stránky.",
+ "A scalping strategy for 5–15 minute charts, written in Pine Script on TradingView. Signals arrive by e-mail; the Python engine parses them, places a limit order, keeps it in the order book while the price remains favourable and re-prices it as the market moves. The \"Limit order bot\" mode at the top of the page illustrates this loop.": "Scalpingová strategie pro 5–15minutové grafy napsaná v Pine Scriptu na TradingView. Signály přicházejí e-mailem; engine v Pythonu je zpracuje, zadá limitní příkaz, ponechá ho v knize objednávek, dokud je cena výhodná, a při pohybu trhu ho přecení. Tento princip ukazuje režim „Bot s limitními příkazy“ na začátku stránky.",
  "Source on GitHub": "Zdrojový kód na GitHubu",
  "Strategy on TradingView": "Strategie na TradingView",
- "Web page scoring bot for Telegram": "Hodnocení webových stránek s výstupem do Telegramu",
- "Uses an AI API to score web pages and posts the results to a Telegram channel.": "Pomocí AI API hodnotí webové stránky a výsledky publikuje do kanálu na Telegramu.",
+ "Web page scoring with Telegram output": "Hodnocení webových stránek s výstupem do Telegramu",
+ "Scores web pages via an AI API and publishes the results to a Telegram channel.": "Pomocí AI API hodnotí webové stránky a výsledky publikuje do kanálu na Telegramu.",
  "Logistics tools": "Nástroje pro logistiku",
- "Written to save time in my logistics job.": "Vznikly pro zefektivnění mé práce v logistice.",
+ "Built to streamline my work in logistics.": "Vznikly pro zefektivnění mé práce v logistice.",
  "Invoice to packing list converter": "Převod faktur na balicí listy",
- "Reads a specific type of PDF invoice, extracts the key data and fills it into a predefined Excel packing list. Packaging dimensions are entered quickly, so a complete packing list takes minutes instead of manual retyping. A related tool turns invoices into price lists.": "Načte určitý typ PDF faktury, vytěží klíčové údaje a doplní je do předpřipravené šablony balicího listu v Excelu. Rozměry balení se zadávají rychle, takže kompletní balicí list je hotový během několika minut místo ručního přepisování. Související nástroj převádí faktury na ceníky.",
- "Customs code (HS) finder": "Vyhledávání celních kódů (HS)",
- "Collects HS codes that were actually used in export and import, cleans them into a local database, and finds the best match for a product description, so people without customs knowledge can find a code.": "Shromažďuje HS kódy skutečně použité při exportu a importu, čistí je do lokální databáze a k popisu zboží vyhledá nejvhodnější kód. Kód tak dohledá i uživatel bez znalosti celní problematiky.",
- "Quick volume calculator": "Rychlý výpočet objemu",
- "Calculates volume and volumetric weight, stores rows in a pandas DataFrame, exports to CSV or Excel and predicts whether a package is a pallet or a carton. A simplified version runs <a href=\"#calc\">further down this page</a>.": "Počítá objem a objemovou hmotnost, ukládá záznamy do pandas DataFrame, exportuje do CSV nebo Excelu a odhaduje, zda jde o paletu, nebo karton. Zjednodušenou verzi si můžete vyzkoušet <a href=\"#calc\">níže na této stránce</a>.",
- "Desktop apps and learning": "Desktopové aplikace a studijní projekty",
+ "Reads a specific type of PDF invoice, extracts the key data and populates a predefined Excel packing list template. Packaging dimensions are entered quickly, so a complete packing list takes minutes instead of manual retyping. A related tool converts invoices into price lists.": "Načte určitý typ PDF faktury, vytěží klíčové údaje a doplní je do předpřipravené šablony balicího listu v Excelu. Rozměry balení se zadávají rychle, takže kompletní balicí list je hotový během několika minut místo ručního přepisování. Související nástroj převádí faktury na ceníky.",
+ "Customs code (HS) lookup": "Vyhledávání celních kódů (HS)",
+ "Collects HS codes actually used in exports and imports, cleans them into a local database and finds the best match for a product description, so users without customs expertise can identify the correct code.": "Shromažďuje HS kódy skutečně použité při exportu a importu, čistí je do lokální databáze a k popisu zboží vyhledá nejvhodnější kód. Kód tak dohledá i uživatel bez znalosti celní problematiky.",
+ "Quick Volume Calculator": "Rychlý výpočet objemu",
+ "Calculates volume and volumetric weight, stores entries in a pandas DataFrame, exports to CSV or Excel and determines whether a package is a pallet or a carton. A simplified version is available <a href=\"#calc\">further down this page</a>.": "Počítá objem a objemovou hmotnost, ukládá záznamy do pandas DataFrame, exportuje do CSV nebo Excelu a odhaduje, zda jde o paletu, nebo karton. Zjednodušenou verzi si můžete vyzkoušet <a href=\"#calc\">níže na této stránce</a>.",
+ "Desktop applications and study projects": "Desktopové aplikace a studijní projekty",
  "AppKiller and AudioSwitch": "AppKiller a AudioSwitch",
- "Two small desktop utilities: one for closing applications quickly, one for switching audio outputs. Built with an object-oriented structure.": "Dva menší desktopové nástroje: jeden pro rychlé ukončování aplikací, druhý pro přepínání zvukových výstupů. Navrženo objektově.",
- "Self-training chatbot": "Samoučící chatbot",
- "A chatbot on a deep neural network. Wrong answers can be corrected during the chat, and the network retrains after a restart.": "Chatbot postavený na hluboké neuronové síti. Chybné odpovědi lze během konverzace opravit a síť se po restartu přetrénuje.",
- "NumPy basics trainer": "Výukový nástroj pro NumPy",
- "A study tool that walks through NumPy code blocks with my own notes.": "Studijní pomůcka, která prochází ukázky kódu v NumPy s vlastními komentáři.",
- "Try one of my tools": "Ukázka nástroje",
- "A simplified version of my Quick Volume Calculator. Drag the sliders: it works out the total volume, the total weight and the volumetric weight, and decides whether the piece is a pallet or a carton.": "Zjednodušená verze mého nástroje Quick Volume Calculator. Po nastavení rozměrů vypočítá celkový objem, celkovou hmotnost a objemovou hmotnost a určí, zda jde o paletu, nebo karton.",
+ "Two small desktop utilities: one for quickly closing applications, one for switching audio outputs. Built using object-oriented design.": "Dva menší desktopové nástroje: jeden pro rychlé ukončování aplikací, druhý pro přepínání zvukových výstupů. Navrženo objektově.",
+ "Self-learning chatbot": "Samoučící chatbot",
+ "A chatbot based on a deep neural network. Incorrect answers can be corrected during the conversation, and the network retrains after a restart.": "Chatbot postavený na hluboké neuronové síti. Chybné odpovědi lze během konverzace opravit a síť se po restartu přetrénuje.",
+ "NumPy study tool": "Výukový nástroj pro NumPy",
+ "A study aid that walks through NumPy code examples with my own annotations.": "Studijní pomůcka, která prochází ukázky kódu v NumPy s vlastními komentáři.",
+ "Tool demo": "Ukázka nástroje",
+ "A simplified version of my Quick Volume Calculator. Set the dimensions with the sliders to calculate the total volume, total weight and volumetric weight, and to determine whether the item is a pallet or a carton.": "Zjednodušená verze mého nástroje Quick Volume Calculator. Po nastavení rozměrů vypočítá celkový objem, celkovou hmotnost a objemovou hmotnost a určí, zda jde o paletu, nebo karton.",
  "Quantity": "Počet kusů",
  "Length": "Délka",
  "Width": "Šířka",
@@ -861,10 +870,9 @@
  "Total weight": "Celková hmotnost",
  "Volumetric weight": "Objemová hmotnost",
  "Packing": "Typ balení",
- "As in the original tool, volumetric weight uses the 167 kg per m³ standard, and a piece counts as a pallet when its base is at least 80 × 60 cm.": "Stejně jako v původním nástroji se objemová hmotnost počítá podle standardu 167 kg na m³ a kus se považuje za paletu, pokud má podstavu alespoň 80 × 60 cm.",
+ "As in the original tool, volumetric weight is calculated using the 167 kg per m³ standard, and an item is classified as a pallet if its base is at least 80 × 60 cm.": "Stejně jako v původním nástroji se objemová hmotnost počítá podle standardu 167 kg na m³ a kus se považuje za paletu, pokud má podstavu alespoň 80 × 60 cm.",
  "Package drawn to scale": "Zásilka v měřítku",
- "Toolbox": "Technologie",
- "What I use day to day, and what I have worked with before.": "Co používám v každodenní práci a s čím mám zkušenosti z dřívějška.",
+ "Tools I use daily and technologies I have worked with previously.": "Co používám v každodenní práci a s čím mám zkušenosti z dřívějška.",
  "Languages": "Programovací jazyky",
  "AI and automation": "AI a automatizace",
  "OpenAI and Claude APIs": "OpenAI a Claude API",
@@ -876,14 +884,24 @@
  "Structured logging": "Strukturované logování",
  "Apps and enterprise systems": "Aplikace a podnikové systémy",
  "About": "O mně",
- "I have been curious about how computers work for as long as I can remember. Before programming I spent seven years in international transport and purchasing, after a master's degree in transport management. My first scripts were written to take the repetitive parts out of that work.": "Počítače a jejich fungování mě zajímají dlouhodobě. Po magisterském studiu v oboru řízení dopravy jsem sedm let působil v mezinárodní přepravě a nákupu. První skripty vznikly s cílem automatizovat opakované činnosti v této práci.",
- "In 2023 I moved to programming full time. I now work on AI automation in Python, and in my own time I build trading and DeFi bots.": "V roce 2023 jsem přešel k programování na plný úvazek. V současnosti se věnuji AI automatizaci v Pythonu a ve volném čase vyvíjím obchodní a DeFi systémy.",
- "English at B2 level, Czech native.": "Angličtina na úrovni B2, čeština jako rodný jazyk.",
+ "Computers and how they work have interested me for a long time. After a master's degree in transport management, I spent seven years in international transport and purchasing. I wrote my first scripts to automate repetitive tasks in that work.": "Počítače a jejich fungování mě zajímají dlouhodobě. Po magisterském studiu v oboru řízení dopravy jsem sedm let působil v mezinárodní přepravě a nákupu. První skripty vznikly s cílem automatizovat opakované činnosti v této práci.",
+ "In 2023, I moved into programming full time. I currently focus on AI automation in Python and, in my spare time, develop trading and DeFi systems.": "V roce 2023 jsem přešel k programování na plný úvazek. V současnosti se věnuji AI automatizaci v Pythonu a ve volném čase vyvíjím obchodní a DeFi systémy.",
+ "English (B2), Czech (native).": "Angličtina na úrovni B2, čeština jako rodný jazyk.",
  "Published scripts": "Publikované skripty",
- "HTML, CSS and JavaScript, no frameworks": "HTML, CSS a JavaScript bez frameworků"
+ "HTML, CSS and JavaScript, no frameworks": "HTML, CSS a JavaScript bez frameworků",
+ "Professional experience": "Profesní zkušenosti",
+ "Technologies": "Technologie",
+ "<span class=\"n\">1</span>Intake": "<span class=\"n\">1</span>Příjem",
+ "<span class=\"n\">2</span>Extraction": "<span class=\"n\">2</span>Vytěžení",
+ "<span class=\"n\">3</span>Validation": "<span class=\"n\">3</span>Validace",
+ "<span class=\"n\">4</span>Hand-off": "<span class=\"n\">4</span>Předání",
+ "<span class=\"n\">5</span>Operations": "<span class=\"n\">5</span>Provoz a podpora",
+ "Log analysis": "Analýza logů",
+ "Fix deployment": "Nasazení opravy",
+ "Menu": "Menu"
 };
   var META = {
-    en: { title: 'Ondřej Zelík – Python & AI automation developer', desc: 'Python and AI automation developer. LLM workflows, document processing, trading and DeFi bots, and a background in logistics.' },
+    en: { title: 'Ondřej Zelík – Python & AI automation developer', desc: 'Python developer focused on AI automation: LLM workflows, document processing, trading and DeFi systems, and a background in logistics.' },
     cz: { title: 'Ondřej Zelík – Python vývojář, AI automatizace', desc: 'Python vývojář se zaměřením na AI automatizaci: LLM workflow, zpracování dokumentů, obchodní a DeFi systémy a zázemí v logistice.' }
   };
   var lang = 'en', listeners = [];
@@ -990,10 +1008,10 @@
   function sgn(x) { return (x >= 0 ? '+' : '') + x.toFixed(2); }
 
   function hintText() {
-    if (reduce) return T({ en: 'Animation is off because your device asks for reduced motion. This is a still frame.', cz: 'Animace je vypnutá, protože zařízení vyžaduje omezení pohybu. Zobrazen je statický snímek.' });
-    var act = coarse ? { en: 'Tap the chart to move the price.', cz: 'Klepnutím do grafu posunete cenu.' } : { en: 'Move your cursor over the chart and the price follows.', cz: 'Pohybem kurzoru nad grafem ovládáte cenu.' };
-    if (mode === 'order') return T(act) + ' ' + T({ en: 'The orange line is the buy limit order. Once it fills, a green sell order is placed above the entry price, which is shown as a dashed line.', cz: 'Oranžová linie je nákupní limitní příkaz. Po jeho vyplnění se nad vstupní cenou, vyznačenou přerušovanou linií, zadá zelený prodejní příkaz.' });
-    return T(act) + ' ' + T({ en: 'The band is a liquidity position: it earns fees while the price stays inside, and the bot moves it when the price stays outside for too long.', cz: 'Pásmo představuje likviditní pozici: dokud je cena uvnitř, generuje poplatky, a pokud cena zůstane mimo příliš dlouho, bot pozici přesune.' });
+    if (reduce) return T({ en: 'Animation is disabled because your device requests reduced motion. This is a still frame.', cz: 'Animace je vypnutá, protože zařízení vyžaduje omezení pohybu. Zobrazen je statický snímek.' });
+    var act = coarse ? { en: 'Tap the chart to move the price.', cz: 'Klepnutím do grafu posunete cenu.' } : { en: 'Move the cursor over the chart to control the price.', cz: 'Pohybem kurzoru nad grafem ovládáte cenu.' };
+    if (mode === 'order') return T(act) + ' ' + T({ en: 'The orange line is the buy limit order. Once it is filled, a green sell order is placed above the entry price, shown as a dashed line.', cz: 'Oranžová linie je nákupní limitní příkaz. Po jeho vyplnění se nad vstupní cenou, vyznačenou přerušovanou linií, zadá zelený prodejní příkaz.' });
+    return T(act) + ' ' + T({ en: 'The band represents a liquidity position: it earns fees while the price stays inside and is repositioned by the bot when the price remains outside for too long.', cz: 'Pásmo představuje likviditní pozici: dokud je cena uvnitř, generuje poplatky, a pokud cena zůstane mimo příliš dlouho, bot pozici přesune.' });
   }
 
   function colors() {
@@ -1238,28 +1256,28 @@
 (function () {
   var OZ = window.OZ;
   var stages = [
-    { en: { t: 'Take in documents and data', p: 'Documents arrive from e-mail, shared folders, portals or APIs, some as digital text and some as scans. I build the parts that collect and sort them, with OCR where it is needed.', c: ['Python', 'OCR', 'PDF processing', 'REST APIs'], log: 'Document received and prepared' },
+    { en: { t: 'Document and data intake', p: 'Documents arrive by e-mail, from shared folders, portals or APIs, both as digital text and as scans. I develop the components that collect and classify them, including OCR where needed.', c: ['Python', 'OCR', 'PDF processing', 'REST APIs'], log: 'Document received and prepared for processing' },
       cz: { t: 'Příjem dokumentů a dat', p: 'Dokumenty přicházejí e-mailem, ze sdílených složek, portálů nebo přes API, a to jako digitální text i jako skeny. Vyvíjím části, které je shromažďují a třídí, včetně OCR tam, kde je potřeba.', c: ['Python', 'OCR', 'Zpracování PDF', 'REST API'], log: 'Dokument přijat a připraven ke zpracování' } },
-    { en: { t: 'Understand them with language models', p: 'LLM workflows read the document and return structured JSON. My part is prompt engineering, deciding what to extract, and making it reliable across many layouts and languages.', c: ['OpenAI and Claude APIs', 'Prompt engineering', 'Structured JSON'], log: 'Fields extracted by the model' },
-      cz: { t: 'Porozumění pomocí jazykových modelů', p: 'LLM workflow dokument zpracují a vrátí strukturovaný JSON. Odpovídám za návrh promptů, za určení vytěžovaných údajů a za spolehlivost napříč různými rozvrženími dokumentů a jazyky.', c: ['OpenAI a Claude API', 'Prompt engineering', 'Strukturovaný JSON'], log: 'Údaje vytěženy modelem' } },
-    { en: { t: 'Check before anything goes further', p: 'Results are validated against business rules and cross-checks. When something does not add up, the process stops and creates an error report, so wrong data never moves on.', c: ['Data validation', 'Error reports', 'Pytest'], log: 'All checks passed' },
+    { en: { t: 'Extraction with language models', p: 'LLM workflows process the document and return structured JSON. I am responsible for prompt design, defining which data to extract and ensuring reliability across many document layouts and languages.', c: ['OpenAI and Claude APIs', 'Prompt engineering', 'Structured JSON'], log: 'Data extracted by the model' },
+      cz: { t: 'Vytěžení pomocí jazykových modelů', p: 'LLM workflow dokument zpracují a vrátí strukturovaný JSON. Odpovídám za návrh promptů, za určení vytěžovaných údajů a za spolehlivost napříč různými rozvrženími dokumentů a jazyky.', c: ['OpenAI a Claude API', 'Prompt engineering', 'Strukturovaný JSON'], log: 'Údaje vytěženy modelem' } },
+    { en: { t: 'Validation before further processing', p: 'Results are validated against business rules and cross-checks. If something does not match, the process stops and generates an error report, so incorrect data never moves downstream.', c: ['Data validation', 'Error reports', 'Pytest'], log: 'All checks passed' },
       cz: { t: 'Kontrola před dalším zpracováním', p: 'Výsledky se ověřují podle obchodních pravidel a křížových kontrol. Pokud něco nesouhlasí, proces se zastaví a vytvoří chybový report, takže chybná data nikdy nepostoupí dál.', c: ['Validace dat', 'Chybové reporty', 'Pytest'], log: 'Všechny kontroly prošly' } },
-    { en: { t: 'Hand the result to company systems', p: 'Validated data goes into the customer’s ERP and other business software, so nobody has to retype it.', c: ['ERP integration', 'RPA'], log: 'Delivered to the target system' },
+    { en: { t: 'Hand-off to business systems', p: 'Validated data is passed to the client’s ERP and other business systems, eliminating manual re-entry.', c: ['ERP integration', 'RPA'], log: 'Data delivered to the target system' },
       cz: { t: 'Předání do podnikových systémů', p: 'Ověřená data se předávají do ERP zákazníka a dalších podnikových systémů, takže je nikdo nemusí ručně přepisovat.', c: ['Integrace s ERP', 'RPA'], log: 'Data předána do cílového systému' } },
-    { en: { t: 'Run and support it in production', p: 'I deploy and maintain the automations on Linux and in Docker, manage dependencies and versions, and handle Service Desk tickets: from the logs to the root cause and a deployed fix.', c: ['Linux', 'Docker', 'Git', 'SSH', 'Structured logging', 'Service Desk'], log: 'Logged for monitoring' },
+    { en: { t: 'Production operation and support', p: 'I deploy and maintain the automations on Linux and in Docker, manage dependencies and versions, and resolve Service Desk tickets, from log analysis and root cause identification to deploying the fix.', c: ['Linux', 'Docker', 'Git', 'SSH', 'Structured logging', 'Service Desk'], log: 'Logged for monitoring' },
       cz: { t: 'Provoz a podpora v produkci', p: 'Automatizace nasazuji a udržuji na Linuxu a v Dockeru, spravuji závislosti a verze a řeším požadavky ze Service Desku: od logů přes analýzu příčiny až po nasazení opravy.', c: ['Linux', 'Docker', 'Git', 'SSH', 'Strukturované logování', 'Service Desk'], log: 'Zaznamenáno pro monitoring' } }
   ];
   var M = {
     clean: { en: 'Valid document received', cz: 'Přijat bezchybný dokument' },
     bad: { en: 'Document with an error received', cz: 'Přijat dokument s chybou' },
     fail: { en: 'Validation failed: the total does not match the line items. Processing stopped.', cz: 'Validace selhala: celková částka neodpovídá položkám. Zpracování bylo zastaveno.' },
-    s0: { en: 'Error report created: document ID, stage, input and model output', cz: 'Vytvořen chybový report: ID dokumentu, fáze, vstup a výstup modelu' },
-    s1: { en: 'Service Desk ticket assigned to me', cz: 'Požadavek ze Service Desku přidělen k řešení' },
-    s2: { en: 'Complete prepared logs downloaded, root cause identified', cz: 'Staženy kompletní logy, příčina identifikována' },
+    s0: { en: 'Error report generated: document ID, stage, input and model output', cz: 'Vytvořen chybový report: ID dokumentu, fáze, vstup a výstup modelu' },
+    s1: { en: 'Service Desk ticket assigned for resolution', cz: 'Požadavek ze Service Desku přidělen k řešení' },
+    s2: { en: 'Complete logs downloaded, root cause identified', cz: 'Staženy kompletní logy, příčina identifikována' },
     s3: { en: 'Fix tested and deployed to production', cz: 'Oprava otestována a nasazena do produkce' },
     re: { en: 'Document reprocessed, all checks passed', cz: 'Dokument znovu zpracován, všechny kontroly prošly' },
-    d1: { en: 'The document did not go through. An error report was created and passed to support.', cz: 'Dokument neprošel. Byl vytvořen chybový report a předán podpoře.' },
-    d2: { en: 'Resolved: the fix is in production and the document went through.', cz: 'Vyřešeno: oprava je v produkci a dokument prošel.' }
+    d1: { en: 'The document did not pass. An error report was generated and forwarded to support.', cz: 'Dokument neprošel. Byl vytvořen chybový report a předán podpoře.' },
+    d2: { en: 'Resolved: the fix is in production and the document was processed successfully.', cz: 'Vyřešeno: oprava je v produkci a dokument prošel.' }
   };
   var LETTERS = ['A', 'B', 'C', 'D'];
   var tabs = Array.prototype.slice.call(document.querySelectorAll('#pipe [role=tab]'));
@@ -1269,6 +1287,8 @@
   var bClean = document.getElementById('runClean'), bTricky = document.getElementById('runTricky');
   var timers = [], cur = 0, entries = [], detourState = null;
   function S(i) { return stages[i][OZ.lang]; }
+  var reduceM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function sv(el) { if (window.innerWidth < 704) el.scrollIntoView({ behavior: reduceM ? 'auto' : 'smooth', block: 'nearest' }); }
 
   function show(i, focus) {
     cur = i;
@@ -1314,7 +1334,7 @@
     if (tricky) {
       at(STEP, function () {
         tabs[2].classList.remove('busy'); tabs[2].classList.add('err');
-        log(M.fail, 'err'); detourState = 'fail'; support.hidden = false; renderTrace(); sBegin(0);
+        log(M.fail, 'err'); detourState = 'fail'; support.hidden = false; renderTrace(); sBegin(0); sv(support);
       });
       at(STEP, function () { sFinish(0, M.s0); sBegin(1); });
       at(STEP, function () { sFinish(1, M.s1); sBegin(2); });
@@ -1325,7 +1345,7 @@
       at(STEP, function () { finish(2, lg(2)); begin(3); });
     }
     at(STEP, function () { finish(3, lg(3)); begin(4); });
-    at(STEP, function () { finish(4, lg(4)); bClean.disabled = bTricky.disabled = false; });
+    at(STEP, function () { finish(4, lg(4)); bClean.disabled = bTricky.disabled = false; sv(trace); });
   }
 
   tabs.forEach(function (b, i) {
@@ -1350,21 +1370,21 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function m(who, en, cz) { return [who, { en: en, cz: cz }]; }
   var phases = [
-    [m('me', 'Here is the goal, the constraints and the data. Propose a structure and a few options.', 'Zde je cíl, omezení a dostupná data. Navrhni strukturu a několik variant řešení.'),
-     m('ai', 'Suggests modules, interfaces and alternative approaches.', 'Navrhne moduly, rozhraní a alternativní přístupy.'),
-     m('me', 'I choose the approach, remove what we do not need and record the decisions.', 'Zvolím přístup, odstraním, co není potřeba, a rozhodnutí zdokumentuji.')],
-    [m('me', 'Agent 1: the parser module. Agent 2: tests for the existing API. Each on its own branch.', 'Agent 1: modul parseru. Agent 2: testy stávajícího API. Každý ve vlastní větvi.'),
-     m('ai', 'Both agents work at the same time and stop when they need a decision.', 'Oba agenti pracují souběžně a zastaví se, když potřebují rozhodnutí.'),
-     m('me', 'Meanwhile I work on the integration myself and switch between the tasks when needed.', 'Mezitím sám pracuji na integraci a mezi úlohami přepínám podle potřeby.')],
-    [m('me', 'Show me the diff and explain every change.', 'Ukaž mi diff a vysvětli každou změnu.'),
-     m('ai', 'Explains the changes and points out the risky parts.', 'Vysvětlí změny a upozorní na riziková místa.'),
-     m('me', 'I read the code until I understand every line and check it against our team standards: structure, naming, logging and tests. Code I cannot explain does not get merged.', 'Kód procházím, dokud nerozumím každému řádku, a kontroluji ho podle týmových standardů: struktura, pojmenování, logování a testy. Kód, který nedokážu vysvětlit, do projektu nezačleňuji.')],
+    [m('me', 'Here are the goal, the constraints and the available data. Propose a structure and several options.', 'Zde je cíl, omezení a dostupná data. Navrhni strukturu a několik variant řešení.'),
+     m('ai', 'Proposes modules, interfaces and alternative approaches.', 'Navrhne moduly, rozhraní a alternativní přístupy.'),
+     m('me', 'I select the approach, remove what is unnecessary and document the decisions.', 'Zvolím přístup, odstraním, co není potřeba, a rozhodnutí zdokumentuji.')],
+    [m('me', 'Agent 1: the parser module. Agent 2: tests for the existing API. Each on a separate branch.', 'Agent 1: modul parseru. Agent 2: testy stávajícího API. Každý ve vlastní větvi.'),
+     m('ai', 'Both agents work concurrently and pause when a decision is needed.', 'Oba agenti pracují souběžně a zastaví se, když potřebují rozhodnutí.'),
+     m('me', 'Meanwhile, I work on the integration myself and switch between tasks as required.', 'Mezitím sám pracuji na integraci a mezi úlohami přepínám podle potřeby.')],
+    [m('me', 'Show me the diff and explain each change.', 'Ukaž mi diff a vysvětli každou změnu.'),
+     m('ai', 'Explains the changes and highlights the risky areas.', 'Vysvětlí změny a upozorní na riziková místa.'),
+     m('me', 'I review the code until I understand every line and check it against our team standards: structure, naming, logging and tests. Code I cannot explain is not merged.', 'Kód procházím, dokud nerozumím každému řádku, a kontroluji ho podle týmových standardů: struktura, pojmenování, logování a testy. Kód, který nedokážu vysvětlit, do projektu nezačleňuji.')],
     [m('me', 'List the edge cases and write pytest tests for them.', 'Sepiš okrajové případy a napiš pro ně testy v pytestu.'),
      m('ai', 'Generates tests and test data.', 'Vygeneruje testy a testovací data.'),
-     m('me', 'I add the cases that only someone who knows the business and the customer would think of.', 'Doplním případy, které napadnou jen toho, kdo zná obchodní procesy a zákazníka.')],
-    [m('me', 'Here are the logs from a Service Desk ticket. What could cause this?', 'Zde jsou logy z požadavku ze Service Desku. Co může být příčinou?'),
-     m('ai', 'Offers hypotheses and places to look.', 'Nabídne hypotézy a místa, kam se podívat.'),
-     m('me', 'I reproduce the problem, confirm the cause and decide on the fix. What goes to production is my responsibility.', 'Problém zreprodukuji, ověřím příčinu a rozhodnu o opravě. Za to, co jde do produkce, odpovídám já.')]
+     m('me', 'I add the cases that only someone who knows the business processes and the client would anticipate.', 'Doplním případy, které napadnou jen toho, kdo zná obchodní procesy a zákazníka.')],
+    [m('me', 'Here are the logs from a Service Desk ticket. What could be the cause?', 'Zde jsou logy z požadavku ze Service Desku. Co může být příčinou?'),
+     m('ai', 'Suggests hypotheses and where to look.', 'Nabídne hypotézy a místa, kam se podívat.'),
+     m('me', 'I reproduce the issue, confirm the cause and decide on the fix. I am accountable for what goes to production.', 'Problém zreprodukuji, ověřím příčinu a rozhodnu o opravě. Za to, co jde do produkce, odpovídám já.')]
   ];
   var tabs = Array.prototype.slice.call(document.querySelectorAll('[data-ph]'));
   var thread = document.getElementById('thread'), timers = [], cur = 0, started = false;
@@ -1442,6 +1462,15 @@
   ['Q', 'L', 'W', 'H', 'K'].forEach(function (key) { s[key].addEventListener('input', calc); });
   OZ.on(calc);
   calc();
+})();
+
+/* ---------- Mobile menu ---------- */
+(function () {
+  var btn = document.getElementById('menuBtn'), nav = document.getElementById('mnav');
+  function set(open) { nav.hidden = !open; btn.setAttribute('aria-expanded', String(open)); }
+  btn.addEventListener('click', function () { set(nav.hidden); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 704) set(false); });
 })();
 
 /* ---------- Contact ---------- */
