@@ -1,0 +1,1465 @@
+TEST\x
+line2<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ondřej Zelík – Python & AI automation developer</title>
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("oz-theme")==="light"?"light":"dark")}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
+<meta name="description" content="Python and AI automation developer. LLM workflows, document processing, trading and DeFi bots, and a background in logistics.">
+<meta property="og:title" content="Ondřej Zelík – Python & AI automation developer">
+<meta property="og:description" content="LLM workflows, document processing, trading and DeFi bots, and a background in logistics.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23FF6A13'/%3E%3Cpath d='M8 44 L24 30 L36 38 L56 16' fill='none' stroke='white' stroke-width='6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --paper: #F2F4F7;
+    --panel: #FFFFFF;
+    --ink: #1C2533;
+    --slate: #6B7482;
+    --muted: #505B69;
+    --rule: #C9D0D9;
+    --orange: #FF6A13;
+    --orange-ink: #C44A00;
+    --peach: #FFE2CC;
+    --on-orange: #FFFFFF;
+    --good: #0F8A5F;
+    --bad: #D1283B;
+    --display: "Bricolage Grotesque", "Arial Narrow", Arial, sans-serif;
+    --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #151B24; --panel: #1E2632; --ink: #EEF2F6; --slate: #8C97A6; --muted: #A7B2BF;
+      --rule: #34404F; --orange: #FF7F33; --orange-ink: #FFA66B; --peach: #4A2E1C; --on-orange: #151B24;
+      --good: #3FCB92; --bad: #FF6B7A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #151B24; --panel: #1E2632; --ink: #EEF2F6; --slate: #8C97A6; --muted: #A7B2BF;
+    --rule: #34404F; --orange: #FF7F33; --orange-ink: #FFA66B; --peach: #4A2E1C; --on-orange: #151B24;
+    --good: #3FCB92; --bad: #FF6B7A;
+  }
+
+  *, *::before, *::after { box-sizing: inherit; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--paper); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 74rem; margin-inline: auto; padding-inline: 1.25rem; }
+  a { color: var(--orange-ink); text-underline-offset: 0.18em; text-decoration-thickness: 1.5px; }
+  a:hover { text-decoration-thickness: 3px; }
+  :focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+  img, svg { max-width: 100%; }
+
+  button {
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--ink);
+    background: var(--panel);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.45rem 1rem;
+    white-space: nowrap;
+  }
+  button:hover { background: var(--peach); }
+  button.primary { background: var(--orange); color: var(--on-orange); border-color: var(--orange); }
+  button.primary:hover { background: var(--orange-ink); border-color: var(--orange-ink); color: #fff; }
+  button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  button[hidden] { display: none; }
+  button:disabled { opacity: 0.55; cursor: default; }
+
+  /* ---------- Header ---------- */
+  .site-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1rem; }
+  .brand { display: flex; align-items: center; gap: 0.6rem; font-family: var(--display); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .brand i { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 8px; background: var(--orange); color: #fff; font-style: normal; font-size: 0.85rem; letter-spacing: 0; }
+  .site-header nav { display: flex; align-items: center; gap: 1.1rem; font-weight: 600; font-size: 0.95rem; }
+  .site-header nav a { color: var(--ink); text-decoration: none; }
+  .site-header nav a:hover { color: var(--orange-ink); }
+  #themeBtn { padding: 0.3rem 0.5rem; display: inline-grid; place-items: center; line-height: 0; }
+  #themeBtn svg { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  @media (max-width: 44rem) { .site-header nav a { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; background: var(--panel); border-block: 2px solid var(--ink); overflow: hidden; touch-action: pan-y; }
+  #book { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-inner { position: relative; z-index: 1; min-height: min(47rem, 94svh); display: flex; flex-direction: column; padding-block: clamp(1.5rem, 4vw, 2.5rem) 1.25rem; pointer-events: none; }
+  .role { display: inline-block; align-self: flex-start; margin: 0 0 0.9rem; padding: 0.2rem 0.75rem; background: var(--peach); color: var(--ink); border-radius: 999px; font-weight: 600; font-size: 0.95rem; }
+  h1 { margin: 0; font-family: var(--display); font-weight: 800; font-variation-settings: "opsz" 96; font-size: clamp(3.2rem, 14vw, 9.5rem); line-height: 0.9; letter-spacing: -0.045em; }
+  .lead { max-width: 35rem; margin: 1.1rem 0 0; font-size: clamp(1.05rem, 2.1vw, 1.25rem); line-height: 1.5; background: color-mix(in srgb, var(--panel) 80%, transparent); padding-right: 0.5rem; }
+  .hero-bottom { margin-top: auto; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; padding-top: 1.5rem; }
+  .panel-glass { background: color-mix(in srgb, var(--panel) 86%, transparent); padding: 0.6rem 0.8rem 0.6rem 0; }
+  .hud { display: flex; gap: 1.6rem; margin: 0; }
+  .hud div { display: flex; flex-direction: column; }
+  .hud dt { font-size: 0.8rem; font-weight: 600; color: var(--muted); }
+  .hud dd { margin: 0; font-family: var(--mono); font-size: 1.3rem; font-weight: 500; line-height: 1.2; min-width: 4ch; }
+  .controls { max-width: 28rem; display: flex; flex-direction: column; gap: 0.6rem; pointer-events: auto; padding-left: 0.8rem; }
+  .modes { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .modes button { padding: 0.3rem 0.8rem; font-size: 0.9rem; }
+  .controls p { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.4; }
+  @media (max-width: 34rem) { .hud { gap: 1rem; } .hud dd { font-size: 1.1rem; } }
+
+  /* ---------- Extras: language, 4-up HUD, sim note, terminal ---------- */
+  :root { --term-bg:#0F141B; --term-fg:#D8DEE6; --term-mut:#8391A3; --term-rule:#2A3443; --term-buy:#FF8A4C; --term-sell:#3FCB92; --term-warn:#FFC266; --term-bad:#FF7B89; --term-info:#7FB2FF; }
+  @media (max-width: 899px) { .lead { margin-bottom: 10rem; } }
+  #langBtn { padding: 0.3rem 0.7rem; font-size: 0.85rem; min-width: 2.9rem; }
+  .hud { flex-wrap: wrap; gap: 0.5rem 1.4rem; }
+  .hud dd { font-variant-numeric: tabular-nums; min-width: 5ch; }
+  .controls .sim-note { font-size: 0.8rem; color: var(--muted); border-top: 1px dashed var(--rule); padding-top: 0.5rem; }
+  .support { padding: 0.8rem 1rem 1rem; background: color-mix(in srgb, var(--bad) 7%, var(--panel)); border-bottom: 2px solid var(--ink); }
+  .support-title { margin: 0 0 0.6rem; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+  .support-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.5rem; }
+  .support-steps li { display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.6rem; border: 2px dashed var(--rule); border-radius: 10px; font-weight: 600; font-size: 0.92rem; opacity: 0.6; }
+  .support-steps li.busy { opacity: 1; border-style: solid; border-color: var(--orange); }
+  .support-steps li.done { opacity: 1; border-style: solid; border-color: var(--ink); }
+  .support-steps .n { display: grid; place-items: center; flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 2px solid currentColor; font-family: var(--mono); font-size: 0.8rem; }
+  .support-steps li.done .n { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .support-steps li.busy .n { animation: pulse 0.9s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) { .support-steps li.busy .n { animation: none; } }
+  @media (max-width: 44rem) { .support-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  /* ---------- Sections ---------- */
+  section { padding-block: clamp(3.5rem, 8vw, 6rem) 0; }
+  h2 { margin: 0 0 0.6rem; font-family: var(--display); font-weight: 800; font-variation-settings: "opsz" 72; font-size: clamp(2.1rem, 6vw, 3.5rem); line-height: 1; letter-spacing: -0.035em; }
+  .intro { margin: 0 0 2rem; max-width: 40rem; color: var(--muted); font-size: 1.1rem; }
+  h3 { margin: 0; font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+
+  /* ---------- Now: extraction demo ---------- */
+  .now-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 60rem) { .now-grid { grid-template-columns: 0.75fr 1.25fr; gap: 2rem; } }
+  .job { background: var(--panel); border: 2px solid var(--ink); border-radius: 14px; padding: 1.25rem 1.25rem 1.4rem; }
+  .job h3 { font-size: 1.5rem; }
+  .job .when { margin: 0.2rem 0 0.9rem; color: var(--muted); font-weight: 500; }
+  .job ul { margin: 0; padding-left: 1.2rem; }
+  .job li { margin-bottom: 0.45rem; }
+  .job li::marker { color: var(--orange); }
+
+
+
+  /* ---------- Now: Aiviro ---------- */
+  .now { padding-top: clamp(3.5rem, 8vw, 6rem); }
+  .now h2 { font-size: clamp(2.6rem, 8vw, 5rem); margin-bottom: 1rem; }
+  .now-lead { margin: 0 0 2.25rem; max-width: 46rem; font-size: clamp(1.15rem, 2.3vw, 1.4rem); line-height: 1.5; }
+  .pipe { background: var(--panel); border: 2px solid var(--ink); border-radius: 14px; overflow: hidden; }
+  .pipe-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 2px solid var(--ink); }
+  .pipe-steps li { display: flex; }
+  .pipe-steps li + li { border-left: 2px solid var(--ink); }
+  .pipe-steps button { flex: 1; border: 0; border-radius: 0; background: var(--panel); padding: 0.9rem 0.6rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.98rem; white-space: normal; text-align: left; }
+  .pipe-steps button:hover { background: var(--peach); }
+  .pipe-steps button[aria-selected="true"] { background: var(--orange); color: var(--on-orange); }
+  .pipe-steps .n { display: grid; place-items: center; flex: none; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 2px solid currentColor; font-family: var(--mono); font-size: 0.85rem; }
+  .pipe-panel { padding: 1.4rem 1.25rem 1.6rem; min-height: 12.5rem; }
+  .pipe-panel h3 { font-size: clamp(1.4rem, 3.2vw, 1.9rem); margin-bottom: 0.5rem; }
+  .pipe-panel p { margin: 0 0 1rem; max-width: 46rem; font-size: 1.08rem; }
+  @media (max-width: 44rem) {
+    .pipe-steps { grid-template-columns: 1fr; }
+    .pipe-steps li + li { border-left: 0; border-top: 2px solid var(--ink); }
+    .pipe-steps button { justify-content: flex-start; padding: 0.7rem 1rem; }
+  }
+
+  .pipe-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0.75rem 1rem; background: var(--peach); border-bottom: 2px solid var(--ink); }
+  .pipe-bar strong { font-family: var(--display); font-size: 1.1rem; }
+  .pipe-bar .btns { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .pipe-bar button { padding: 0.3rem 0.85rem; font-size: 0.9rem; }
+  .pipe-steps button.done:not([aria-selected="true"]) .n { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .pipe-steps button.err, .pipe-steps button.err[aria-selected="true"] { background: var(--bad); color: #fff; }
+  .pipe-steps button.busy .n { animation: pulse 0.9s ease-in-out infinite; }
+  @keyframes pulse { 50% { transform: scale(1.18); } }
+  @media (prefers-reduced-motion: reduce) { .pipe-steps button.busy .n { animation: none; } }
+  .detour { padding: 0.6rem 1rem; background: color-mix(in srgb, var(--bad) 12%, var(--panel)); border-bottom: 2px solid var(--ink); font-weight: 600; font-size: 0.95rem; }
+  .detour.fixed { background: color-mix(in srgb, var(--good) 14%, var(--panel)); }
+  .detour[hidden] { display: none; }
+  .pipe-panel { display: grid; gap: 1.25rem; }
+  @media (min-width: 56rem) { .pipe-panel { grid-template-columns: 1.6fr 1fr; gap: 2rem; } }
+  .log { margin: 0; padding: 0; list-style: none; font-size: 0.9rem; align-self: start; }
+  .log li { display: flex; gap: 0.5rem; align-items: baseline; margin-bottom: 0.3rem; }
+  .log .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; flex: none; transform: translateY(-1px); }
+
+  /* ---------- Building with AI ---------- */
+  .ai-grid { display: grid; gap: 1.25rem; margin-bottom: 1.5rem; }
+  @media (min-width: 52rem) { .ai-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+  .ai-card { background: var(--panel); border: 2px solid var(--ink); border-radius: 14px; padding: 1.25rem; }
+  .ai-card h3 { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .ai-card ul:not(.chips) { margin: 0 0 1rem; padding-left: 1.2rem; }
+  .ai-card li::marker { color: var(--orange); }
+  .ai-card li { margin-bottom: 0.35rem; }
+  .collab { background: var(--ink); color: var(--paper); border-radius: 14px; overflow: hidden; }
+  .collab-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.1rem; border-bottom: 1px solid color-mix(in srgb, var(--paper) 22%, transparent); }
+  .collab-head strong { font-family: var(--display); font-size: 1.15rem; }
+  .phase-tabs { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .phase-tabs button { background: transparent; color: var(--paper); border-color: color-mix(in srgb, var(--paper) 45%, transparent); padding: 0.25rem 0.8rem; font-size: 0.9rem; }
+  .phase-tabs button:hover { background: color-mix(in srgb, var(--paper) 12%, transparent); }
+  .phase-tabs button[aria-selected="true"] { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .thread { padding: 1.25rem 1.1rem; display: flex; flex-direction: column; gap: 0.75rem; min-height: 17rem; }
+  .msg { max-width: min(36rem, 88%); padding: 0.65rem 0.9rem; border-radius: 14px; line-height: 1.45; animation: rise 0.35s ease both; }
+  .msg .who { display: block; font-size: 0.78rem; font-weight: 700; margin-bottom: 0.15rem; opacity: 0.8; }
+  .msg.me { align-self: flex-end; background: var(--orange); color: #fff; border-bottom-right-radius: 4px; }
+  .msg.ai { align-self: flex-start; background: color-mix(in srgb, var(--paper) 12%, var(--ink)); border: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); border-bottom-left-radius: 4px; }
+  .typing { align-self: flex-start; font-family: var(--mono); opacity: 0.7; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
+  @media (prefers-reduced-motion: reduce) { .msg { animation: none; } }
+  .collab-foot { margin: 0; padding: 0.7rem 1.1rem; font-size: 0.85rem; opacity: 0.75; border-top: 1px solid color-mix(in srgb, var(--paper) 22%, transparent); }
+  .conf { margin: 1rem 0 2.5rem; font-size: 0.92rem; color: var(--muted); max-width: 46rem; }
+
+  /* ---------- Timeline ---------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.75rem; }
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 5.35rem; top: 0.5rem; bottom: 0.5rem; width: 3px; background: var(--rule); border-radius: 2px; }
+  .tl { position: relative; display: grid; grid-template-columns: 4.6rem 1fr; gap: 1.6rem; padding-bottom: 1.6rem; }
+  .tl[hidden] { display: none; }
+  .tl .yr { font-family: var(--mono); font-weight: 500; font-size: 0.95rem; text-align: right; padding-top: 0.2rem; }
+  .tl::after { content: ""; position: absolute; left: 4.95rem; top: 0.45rem; width: 1.05rem; height: 1.05rem; border-radius: 50%; background: var(--panel); border: 3px solid var(--slate); }
+  .tl[data-kind="code"]::after { border-color: var(--orange); background: var(--orange); }
+  .tl[data-kind="logistics"]::after { border-color: var(--ink); }
+  .tl .card { padding-left: 0.4rem; }
+  .tl h3 { font-size: 1.25rem; }
+  .tl .org { margin: 0.1rem 0 0.35rem; font-weight: 600; color: var(--muted); }
+  .tl p { margin: 0; max-width: 42rem; }
+  .kind { display: inline-block; margin-left: 0.4rem; padding: 0 0.5rem; border-radius: 999px; font-family: var(--body); font-size: 0.75rem; font-weight: 700; vertical-align: 0.2em; letter-spacing: 0; }
+  .kind.code { background: var(--orange); color: var(--on-orange); }
+  .kind.logistics { background: var(--ink); color: var(--paper); }
+  .kind.education { background: var(--rule); color: var(--ink); }
+  @media (max-width: 34rem) {
+    .timeline::before { left: 0.45rem; }
+    .tl { grid-template-columns: 1fr; gap: 0.1rem; padding-left: 1.8rem; }
+    .tl::after { left: 0; }
+    .tl .yr { text-align: left; }
+    .tl .card { padding-left: 0; }
+  }
+
+  /* ---------- Projects ---------- */
+  .group { margin-bottom: 2.5rem; }
+  .group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1rem; margin-bottom: 0.6rem; }
+  .group-head h3 { font-size: clamp(1.5rem, 3.5vw, 2rem); }
+  .group-head p { margin: 0; color: var(--muted); max-width: 40rem; }
+  .proj { border-top: 2px solid var(--ink); }
+  .proj:last-child { border-bottom: 2px solid var(--ink); }
+  .proj summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; align-items: center; padding-block: 0.95rem; }
+  .proj summary::-webkit-details-marker { display: none; }
+  .proj summary::after { content: "+"; grid-row: 1 / span 2; grid-column: 2; display: grid; place-items: center; width: 2.1rem; height: 2.1rem; border-radius: 50%; border: 2px solid var(--ink); font-family: var(--mono); font-size: 1.2rem; line-height: 1; }
+  .proj[open] summary::after { content: "\2212"; background: var(--orange); border-color: var(--orange); color: var(--on-orange); }
+  .proj summary:hover h4 { color: var(--orange-ink); }
+  .proj h4 { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.2rem, 3vw, 1.55rem); letter-spacing: -0.02em; line-height: 1.2; }
+  .proj .meta { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; align-items: center; font-size: 0.9rem; color: var(--muted); }
+  .badge { font-size: 0.75rem; font-weight: 700; padding: 0.05rem 0.55rem; border-radius: 999px; background: var(--peach); color: var(--ink); }
+  .badge.hand { background: var(--ink); color: var(--paper); }
+  .badge.live { background: var(--orange); color: var(--on-orange); }
+  .proj .body { padding: 0 0 1.3rem; max-width: 44rem; }
+  .proj .body p { margin: 0 0 0.8rem; }
+  .proj .links { display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; font-weight: 600; }
+  .note { color: var(--muted); font-size: 0.95rem; }
+
+  /* ---------- Calculator ---------- */
+  .calc { display: grid; gap: 1.5rem; background: var(--panel); border: 2px solid var(--ink); border-radius: 14px; padding: 1.25rem; }
+  @media (min-width: 56rem) { .calc { grid-template-columns: 1.1fr 1fr; gap: 2rem; padding: 1.75rem; } }
+  .seg { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .seg button { padding: 0.3rem 0.8rem; font-size: 0.88rem; }
+  .slider { margin-bottom: 1rem; }
+  .slider .row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.15rem; }
+  .slider label { font-weight: 600; font-size: 0.95rem; }
+  .slider output { font-family: var(--mono); font-size: 1.05rem; }
+  input[type=range] { width: 100%; accent-color: var(--orange); height: 1.6rem; }
+  .box-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  #boxSvg { width: 100%; max-width: 22rem; height: auto; }
+  .face-top { fill: var(--peach); }
+  .face-left { fill: var(--orange); }
+  .face-right { fill: var(--orange-ink); }
+  .box-edge { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+  .ground { fill: none; stroke: var(--rule); stroke-width: 1.5; stroke-dasharray: 5 5; }
+  .results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem 1rem; margin: 1.25rem 0 0; padding-top: 1.1rem; border-top: 2px dashed var(--rule); }
+  .results dt { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+  .results dd { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(1.5rem, 4.5vw, 2.1rem); letter-spacing: -0.03em; line-height: 1.1; }
+  .results dd small { font-family: var(--body); font-weight: 500; font-size: 0.9rem; letter-spacing: 0; color: var(--muted); }
+  .results .hi dd { color: var(--orange-ink); }
+  .calc-note { margin: 1rem 0 0; font-size: 0.9rem; color: var(--muted); }
+  #verdict { font-weight: 600; color: var(--ink); }
+
+  /* ---------- Skills ---------- */
+  .skills { display: grid; gap: 1.5rem; }
+  @media (min-width: 48rem) { .skills { grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; } }
+  .skills h3 { font-size: 1.25rem; margin-bottom: 0.6rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+  .chips li { padding: 0.2rem 0.7rem; border: 1.5px solid var(--rule); border-radius: 999px; background: var(--panel); font-size: 0.92rem; font-weight: 500; }
+  .chips li.strong { border-color: var(--orange); background: var(--peach); font-weight: 600; }
+
+  /* ---------- About / contact ---------- */
+  .two-col { display: grid; gap: 2.5rem; }
+  @media (min-width: 52rem) { .two-col { grid-template-columns: 1.3fr 1fr; gap: 4rem; } }
+  .prose p { margin: 0 0 1rem; max-width: 40rem; }
+  .contact-list { list-style: none; margin: 0 0 1.25rem; padding: 0; border-top: 2px solid var(--ink); }
+  .contact-list li { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding-block: 0.75rem; border-bottom: 1px solid var(--rule); font-weight: 600; }
+  .contact-list span { color: var(--muted); font-weight: 500; }
+
+  footer { margin-top: clamp(3.5rem, 9vw, 6rem); padding-block: 1.5rem 2.5rem; border-top: 2px solid var(--ink); font-size: 0.875rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; }
+  /* AI collaboration panel keeps one dark look in both themes */
+  .collab { background: var(--term-bg); color: var(--term-fg); border: 2px solid var(--ink); }
+  .collab-head, .collab-foot { border-color: var(--term-rule); }
+  .phase-tabs button { color: var(--term-fg); border-color: var(--term-mut); }
+  .phase-tabs button:hover { background: color-mix(in srgb, var(--term-fg) 12%, transparent); }
+  .msg.ai { background: color-mix(in srgb, var(--term-fg) 9%, var(--term-bg)); border-color: var(--term-rule); color: var(--term-fg); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site-header">
+    <a class="brand" href="#top"><i>OZ</i>Ondřej Zelík</a>
+    <nav aria-label="Main">
+      <a href="#now">Aiviro</a>
+      <a href="#path">Experience</a>
+      <a href="#ai">AI</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+      <button type="button" id="langBtn" aria-label="Switch language">CZ</button>
+      <button type="button" id="themeBtn" aria-label="Switch to light theme"></button>
+    </nav>
+  </header>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <canvas id="book" role="img" aria-label="Simulated price chart with a trading bot reacting to the price"></canvas>
+    <div class="wrap hero-inner">
+      <p class="role">Python developer · RPA, AI automation and trading systems</p>
+      <h1>Ondřej<br>Zelík</h1>
+      <p class="lead">I design, build and run Python systems in production. At Aiviro I develop RPA and LLM automation that processes business documents for enterprise customers; outside of work I build my own automated trading and DeFi systems. From architecture and code to deployment and support.</p>
+
+      <div class="hero-bottom">
+        <dl class="hud panel-glass" aria-live="off">
+          <div><dt id="k1">Buy limit</dt><dd id="v1">-</dd></div>
+          <div><dt id="k2">Re-priced</dt><dd id="v2">0</dd></div>
+          <div><dt id="k3">Filled</dt><dd id="v3">0</dd></div>
+          <div><dt id="k4">Profit</dt><dd id="v4">0</dd></div>
+        </dl>
+        <div class="controls panel-glass">
+          <div class="modes" role="group" aria-label="Simulation">
+            <button type="button" data-mode="order" aria-pressed="true">Limit order bot</button>
+            <button type="button" data-mode="lp" aria-pressed="false">Liquidity range bot</button>
+            <button type="button" id="shake">Shake the price</button>
+          </div>
+          <p id="hint"></p>
+          <p class="sim-note">Illustration only. This is not my actual strategy, which is far more complex. It is an interactive element, and all profit figures are made up.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- NOW -->
+    <section id="now" class="now" aria-labelledby="now-h">
+      <p class="role">Python Integrator at Aiviro s.r.o., since January 2026</p>
+      <h2 id="now-h">What I do now</h2>
+      <p class="now-lead">I build AI-driven automation for enterprise customers: systems that take in business documents, understand them with language models, check the result and pass clean data into company software. My work covers the whole path, from the first prompt to keeping it running in production.</p>
+
+      <div class="pipe" id="pipe">
+        <div class="pipe-bar">
+          <strong>How a document automation flows</strong>
+          <div class="btns">
+            <button type="button" class="primary" id="runClean">Run a valid document</button>
+            <button type="button" id="runTricky">Run a document with an error</button>
+          </div>
+        </div>
+        <ol class="pipe-steps" role="tablist" aria-label="Stages of an automation">
+          <li><button type="button" role="tab" id="t0" aria-controls="pipePanel" aria-selected="true" data-i="0"><span class="n">1</span>Take in</button></li>
+          <li><button type="button" role="tab" id="t1" aria-controls="pipePanel" aria-selected="false" data-i="1"><span class="n">2</span>Understand</button></li>
+          <li><button type="button" role="tab" id="t2" aria-controls="pipePanel" aria-selected="false" data-i="2"><span class="n">3</span>Check</button></li>
+          <li><button type="button" role="tab" id="t3" aria-controls="pipePanel" aria-selected="false" data-i="3"><span class="n">4</span>Hand off</button></li>
+          <li><button type="button" role="tab" id="t4" aria-controls="pipePanel" aria-selected="false" data-i="4"><span class="n">5</span>Run and support</button></li>
+        </ol>
+        <div class="detour" id="detour" hidden></div>
+        <div class="support" id="support" hidden>
+          <p class="support-title">Support: what I do when a process fails</p>
+          <ol class="support-steps">
+            <li><span class="n">A</span><span>Error report</span></li>
+            <li><span class="n">B</span><span>Service Desk</span></li>
+            <li><span class="n">C</span><span>Logs and analysis</span></li>
+            <li><span class="n">D</span><span>Fix deployed</span></li>
+          </ol>
+        </div>
+        <div class="pipe-panel" id="pipePanel" role="tabpanel" aria-labelledby="t0">
+          <div>
+            <h3 id="pipeTitle"></h3>
+            <p id="pipeText"></p>
+            <ul class="chips" id="pipeChips"></ul>
+          </div>
+          <ul class="log" id="trace" aria-live="polite"></ul>
+        </div>
+      </div>
+
+      <p class="conf">A general picture of the kind of work, not a copy of any product. Customer projects, code and product details stay confidential.</p>
+    </section>
+
+    <!-- PATH -->
+    <section id="path" aria-labelledby="path-h">
+      <h2 id="path-h">Experience</h2>
+      <p class="intro">Where I have written code, from the first experiments to today.</p>
+
+      <ol class="timeline" id="timeline">
+        <li class="tl" data-kind="code">
+          <span class="yr">2026</span>
+          <div class="card">
+            <h3>Python Integrator</h3>
+            <p class="org">Aiviro s.r.o.</p>
+            <p>AI-driven automation for enterprise customers. More in the section above.</p>
+          </div>
+        </li>
+        <li class="tl" data-kind="code">
+          <span class="yr">2023</span>
+          <div class="card">
+            <h3>Programmer, Perl and Python</h3>
+            <p class="org">GATEMA PCB a.s., 2023 to 2025</p>
+            <p>Maintained and extended a proprietary Perl codebase of more than 450,000 lines for printed circuit board production. Built production scripts, GUI applications and database interfaces, automated workflows around Helios Nephrite ERP and InCAM Pro, and improved logging and output control.</p>
+          </div>
+        </li>
+        <li class="tl" data-kind="code">
+          <span class="yr">2022</span>
+          <div class="card">
+            <h3>Own projects alongside work</h3>
+            <p class="org">Ongoing since 2022</p>
+            <p>Logistics tools, a trading bot with Pine Script strategies, and later multithreaded and async bots on Solana and LLM decision systems. See the projects below.</p>
+          </div>
+        </li>
+        <li class="tl" data-kind="code">
+          <span class="yr">2022</span>
+          <div class="card">
+            <h3>Trading internship in Montenegro</h3>
+            <p class="org">Two weeks with the founder of WhaleZone – CJ Fund</p>
+            <p>Developed trading strategies together with a fundamental trader and mentor.</p>
+          </div>
+        </li>
+        <li class="tl" data-kind="code">
+          <span class="yr">2017</span>
+          <div class="card">
+            <h3>First steps in game development</h3>
+            <p class="org">Self-taught, with a mentor from an indie studio</p>
+            <p>Worked on a small game in Unity and on level design, and built the first version of this portfolio.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- AI -->
+    <section id="ai" aria-labelledby="ai-h">
+      <h2 id="ai-h">Building with AI</h2>
+      <p class="intro">AI is part of what I build and of how I build it. I learned to program by hand before AI assistants were practical, which is what lets me direct them, understand what they produce and take responsibility for it.</p>
+
+      <div class="ai-grid">
+        <div class="ai-card">
+          <h3>In what I build</h3>
+          <ul>
+            <li>LLM workflows that turn unstructured documents into structured JSON.</li>
+            <li>AI decision engines that weigh data and context within clear rules.</li>
+            <li>Trading bots that pass live market data to a language model and act on a structured answer.</li>
+          </ul>
+          <ul class="chips"><li class="strong">OpenAI API</li><li class="strong">Claude API</li><li>Prompt engineering</li><li>Structured outputs</li><li>OCR</li></ul>
+        </div>
+        <div class="ai-card">
+          <h3>In how I build</h3>
+          <ul>
+            <li>Coding agents for drafting, refactoring, tests and debugging, often several in parallel on separate tasks.</li>
+            <li>Every change has to be understood and checked against our team standards and tests before it is merged.</li>
+            <li>I set the direction and stay responsible for what goes to production.</li>
+          </ul>
+          <ul class="chips"><li class="strong">Claude Code</li><li class="strong">GitHub Copilot</li><li>Junie</li><li>Gemini and Antigravity</li></ul>
+        </div>
+      </div>
+
+      <div class="collab" id="collab">
+        <div class="collab-head">
+          <strong>How I split the work with AI agents</strong>
+          <div class="phase-tabs" role="tablist" aria-label="Phase">
+            <button type="button" role="tab" aria-selected="true" data-ph="0">Plan</button>
+            <button type="button" role="tab" aria-selected="false" data-ph="1">Build in parallel</button>
+            <button type="button" role="tab" aria-selected="false" data-ph="2">Review</button>
+            <button type="button" role="tab" aria-selected="false" data-ph="3">Test</button>
+            <button type="button" role="tab" aria-selected="false" data-ph="4">Debug</button>
+          </div>
+        </div>
+        <div class="thread" id="thread" role="tabpanel" aria-live="polite"></div>
+        <p class="collab-foot">An illustration of the working pattern, not a real transcript.</p>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" aria-labelledby="work-h">
+      <h2 id="work-h">Projects</h2>
+      <p class="intro">Side projects from the last four years. The early ones were written by hand in 2022 and early 2023, before AI coding assistants were part of everyday work, and they are where most of my Python fundamentals come from.</p>
+
+      <div class="group">
+        <div class="group-head">
+          <h3>Trading and DeFi</h3>
+          <p>Systems that read the market and act on it. Both current bots run on Solana as multithreaded, asynchronous Python applications working with live data streams. Strategy details stay private.</p>
+        </div>
+
+        <details class="proj" name="p" open>
+          <summary>
+            <h4>LPDeltaShield</h4>
+            <span class="meta"><span class="badge live">Current</span><span class="badge">Cloud, 24/7</span><span>Python, asyncio, Solana</span></span>
+          </summary>
+          <div class="body">
+            <p>My most recent bot. It manages concentrated liquidity positions and works to limit their exposure to price moves, deciding when a position should be adjusted and when to leave it alone.</p>
+            <p>It runs autonomously 24/7 on a cloud Linux server, where it moved from an on-premise machine. Next to the trading logic, the project covers deployment and stable unattended operation.</p>
+            <p class="note">The logic is private, so there is no public source.</p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>Stable CLMM bot</h4>
+            <span class="meta"><span class="badge live">Active</span><span>Python, Solana</span></span>
+          </summary>
+          <div class="body">
+            <p>A liquidity provision bot for the USDC/USDT stablecoin pair. It manages a concentrated liquidity (CLMM) position, and because both tokens are stablecoins, the price risk is much lower than with volatile pairs. Written entirely in Python. The "Liquidity range bot" mode in the chart at the top of the page shows the general principle.</p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>LLM decision bots</h4>
+            <span class="meta"><span>Python, OpenAI and Claude APIs</span></span>
+          </summary>
+          <div class="body">
+            <p>Bots that pass live indicator data and market context to a language model, get a structured decision back and execute it automatically.</p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>Allrounder trading bot</h4>
+            <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, Pine Script, Gmail</span></span>
+          </summary>
+          <div class="body">
+            <p>A scalping strategy for 5 to 15 minute charts, written in Pine Script on TradingView. Signals arrive by e-mail; the Python engine parses them, places a limit order, leaves it in the order book while the price is good and re-prices it when the market moves. The "Limit order bot" mode at the top of the page is this loop.</p>
+            <p class="links">
+              <a href="https://github.com/Ex4m/Exchange-limit-order-auto-trading-engine-bot-">Source on GitHub</a>
+              <a href="https://www.tradingview.com/script/XyUayR9K-ALLROUNDER/">Strategy on TradingView</a>
+            </p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>Web page scoring bot for Telegram</h4>
+            <span class="meta"><span>Python, AI API, Telegram</span></span>
+          </summary>
+          <div class="body">
+            <p>Uses an AI API to score web pages and posts the results to a Telegram channel.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="group">
+        <div class="group-head">
+          <h3>Logistics tools</h3>
+          <p>Written to save time in my logistics job.</p>
+        </div>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>Invoice to packing list converter</h4>
+            <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, PDF parsing, Excel</span></span>
+          </summary>
+          <div class="body">
+            <p>Reads a specific type of PDF invoice, extracts the key data and fills it into a predefined Excel packing list. Packaging dimensions are entered quickly, so a complete packing list takes minutes instead of manual retyping. A related tool turns invoices into price lists.</p>
+            <p class="links"><a href="https://github.com/Ex4m/Invoice-to-packing-list-convertor">Source on GitHub</a></p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>Customs code (HS) finder</h4>
+            <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, web scraping</span></span>
+          </summary>
+          <div class="body">
+            <p>Collects HS codes that were actually used in export and import, cleans them into a local database, and finds the best match for a product description, so people without customs knowledge can find a code.</p>
+            <p class="links"><a href="https://github.com/Ex4m/Customs-Nomenclature-Identifier">Source on GitHub</a></p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>Quick volume calculator</h4>
+            <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, pandas</span></span>
+          </summary>
+          <div class="body">
+            <p>Calculates volume and volumetric weight, stores rows in a pandas DataFrame, exports to CSV or Excel and predicts whether a package is a pallet or a carton. A simplified version runs <a href="#calc">further down this page</a>.</p>
+            <p class="links"><a href="https://github.com/Ex4m/Quick-Volume-Calculator">Source on GitHub</a></p>
+          </div>
+        </details>
+      </div>
+
+      <div class="group">
+        <div class="group-head">
+          <h3>Desktop apps and learning</h3>
+        </div>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>AppKiller and AudioSwitch</h4>
+            <span class="meta"><span>Python, GUI, OOP</span></span>
+          </summary>
+          <div class="body">
+            <p>Two small desktop utilities: one for closing applications quickly, one for switching audio outputs. Built with an object-oriented structure.</p>
+            <p class="links"><a href="https://github.com/Ex4m/AppKiller">AppKiller on GitHub</a><a href="https://github.com/Ex4m/Audio_switch">AudioSwitch on GitHub</a></p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>Self-training chatbot</h4>
+            <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, neural network</span></span>
+          </summary>
+          <div class="body">
+            <p>A chatbot on a deep neural network. Wrong answers can be corrected during the chat, and the network retrains after a restart.</p>
+            <p class="links"><a href="https://github.com/Ex4m/Simple-AI-deep-learning-DNN-chatbot">Source on GitHub</a></p>
+          </div>
+        </details>
+
+        <details class="proj" name="p">
+          <summary>
+            <h4>NumPy basics trainer</h4>
+            <span class="meta"><span class="badge hand">Hand-written, 2022</span><span>Python, NumPy</span></span>
+          </summary>
+          <div class="body">
+            <p>A study tool that walks through NumPy code blocks with my own notes.</p>
+            <p class="links"><a href="https://github.com/Ex4m/Numpy-basics-trainer">Source on GitHub</a></p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- CALC -->
+    <section id="calc" aria-labelledby="calc-h">
+      <h2 id="calc-h">Try one of my tools</h2>
+      <p class="intro">A simplified version of my Quick Volume Calculator. Drag the sliders: it works out the total volume, the total weight and the volumetric weight, and decides whether the piece is a pallet or a carton.</p>
+
+      <div class="calc">
+        <div>
+          <div class="slider"><div class="row"><label for="sQ">Quantity</label><output id="oQ" for="sQ"></output></div><input type="range" id="sQ" min="1" max="20" step="1" value="2"></div>
+          <div class="slider"><div class="row"><label for="sL">Length</label><output id="oL" for="sL"></output></div><input type="range" id="sL" min="10" max="240" step="5" value="120"></div>
+          <div class="slider"><div class="row"><label for="sW">Width</label><output id="oW" for="sW"></output></div><input type="range" id="sW" min="10" max="240" step="5" value="80"></div>
+          <div class="slider"><div class="row"><label for="sH">Height</label><output id="oH" for="sH"></output></div><input type="range" id="sH" min="10" max="240" step="5" value="100"></div>
+          <div class="slider"><div class="row"><label for="sK">Weight per piece</label><output id="oK" for="sK"></output></div><input type="range" id="sK" min="1" max="1000" step="1" value="140"></div>
+
+          <dl class="results">
+            <div><dt>Total volume</dt><dd id="rVol">-</dd></div>
+            <div><dt>Total weight</dt><dd id="rTw">-</dd></div>
+            <div class="hi"><dt>Volumetric weight</dt><dd id="rVolKg">-</dd></div>
+            <div><dt>Packing</dt><dd id="rType">-</dd></div>
+          </dl>
+          <p class="calc-note"><span id="verdict"></span> <span>As in the original tool, volumetric weight uses the 167 kg per m³ standard, and a piece counts as a pallet when its base is at least 80 × 60 cm.</span></p>
+        </div>
+        <div class="box-wrap">
+          <svg id="boxSvg" viewBox="0 0 400 400" role="img" aria-label="Package drawn to scale">
+            <polygon class="ground" id="gnd"></polygon>
+            <polygon class="face-left" id="fL"></polygon>
+            <polygon class="face-right" id="fR"></polygon>
+            <polygon class="face-top" id="fT"></polygon>
+            <path class="box-edge" id="edges"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" aria-labelledby="skills-h">
+      <h2 id="skills-h">Toolbox</h2>
+      <p class="intro">What I use day to day, and what I have worked with before.</p>
+      <div class="skills">
+        <div>
+          <h3>Languages</h3>
+          <ul class="chips">
+            <li class="strong">Python: OOP, asyncio, multithreading, REST APIs</li>
+            <li class="strong">Perl</li>
+            <li>SQL</li><li>TypeScript</li><li>JavaScript</li><li>C#</li><li>Pine Script</li>
+          </ul>
+        </div>
+        <div>
+          <h3>AI and automation</h3>
+          <ul class="chips">
+            <li class="strong">OpenAI and Claude APIs</li>
+            <li class="strong">Structured JSON extraction</li>
+            <li>Prompt engineering</li><li>OCR</li><li>PDF and invoice extraction</li><li>RPA</li><li>AI decision engines</li><li class="strong">Claude Code</li><li>GitHub Copilot</li><li>Junie</li><li>Gemini and Antigravity</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Infrastructure</h3>
+          <ul class="chips">
+            <li class="strong">Linux</li><li class="strong">Docker</li>
+            <li>Git, GitHub, GitLab</li><li>SSH</li><li>CI/CD basics</li><li>Pytest</li><li>Structured logging</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Apps and enterprise systems</h3>
+          <ul class="chips">
+            <li>PyQt</li><li>wxWidgets</li><li>pandas</li><li>NumPy</li><li>Helios ERP</li><li>InCAM Pro</li><li>MS Navision</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT + CONTACT -->
+    <section id="contact" aria-labelledby="about-h">
+      <div class="two-col">
+        <div>
+          <h2 id="about-h">About</h2>
+          <div class="prose">
+            <p>I have been curious about how computers work for as long as I can remember. Before programming I spent seven years in international transport and purchasing, after a master's degree in transport management. My first scripts were written to take the repetitive parts out of that work.</p>
+            <p>In 2023 I moved to programming full time. I now work on AI automation in Python, and in my own time I build trading and DeFi bots.</p>
+            <p>English at B2 level, Czech native.</p>
+          </div>
+        </div>
+        <div>
+          <h2>Contact</h2>
+          <ul class="contact-list">
+            <li><span>E-mail</span><a href="mailto:zelik.ondrej@gmail.com">zelik.ondrej@gmail.com</a></li>
+            <li><span>GitHub</span><a href="https://github.com/Ex4m">github.com/Ex4m</a></li>
+            <li><span>TradingView</span><a href="https://www.tradingview.com/u/ExamTheCavalier44/#published-scripts">Published scripts</a></li>
+          </ul>
+          <button type="button" class="primary" id="copyMail">Copy e-mail</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© <span id="year">2026</span> Ondřej Zelík</span>
+      <span>HTML, CSS and JavaScript, no frameworks</span>
+    </footer>
+  </div>
+</main>
+
+<script>
+/* ---------- Language (EN / CZ) ---------- */
+(function () {
+  var DICT = {
+ "Ondřej Zelík – Python &amp; AI automation developer": "Ondřej Zelík – Python vývojář, AI automatizace",
+ "Main": "Hlavní navigace",
+ "Experience": "Profesní zkušenosti",
+ "Work": "Projekty",
+ "Contact": "Kontakt",
+ "Switch language": "Přepnout jazyk",
+ "Simulated price chart with a trading bot reacting to the price": "Simulovaný cenový graf s obchodním botem reagujícím na cenu",
+ "Python developer · RPA, AI automation and trading systems": "Python vývojář · RPA, AI automatizace a obchodní systémy",
+ "I design, build and run Python systems in production. At Aiviro I develop RPA and LLM automation that processes business documents for enterprise customers; outside of work I build my own automated trading and DeFi systems. From architecture and code to deployment and support.": "Navrhuji, vyvíjím a provozuji systémy v Pythonu. Ve společnosti Aiviro vyvíjím RPA a LLM automatizace pro zpracování obchodních dokumentů firemních zákazníků; mimo zaměstnání se věnuji vlastním automatizovaným obchodním a DeFi systémům. Od architektury a kódu po nasazení a podporu.",
+ "Simulation": "Simulace",
+ "Limit order bot": "Bot s limitními příkazy",
+ "Liquidity range bot": "Bot likviditního rozsahu",
+ "Shake the price": "Rozhýbat cenu",
+ "Illustration only. This is not my actual strategy, which is far more complex. It is an interactive element, and all profit figures are made up.": "Pouze ilustrace, nikoli skutečná strategie, která je výrazně složitější. Všechny uvedené hodnoty zisku jsou smyšlené.",
+ "Python Integrator at Aiviro s.r.o., since January 2026": "Python Integrator, Aiviro s.r.o., od ledna 2026",
+ "What I do now": "Současné zaměstnání",
+ "I build AI-driven automation for enterprise customers: systems that take in business documents, understand them with language models, check the result and pass clean data into company software. My work covers the whole path, from the first prompt to keeping it running in production.": "Vyvíjím AI automatizace pro firemní zákazníky: systémy, které přijímají obchodní dokumenty, zpracovávají je pomocí jazykových modelů, ověřují výsledky a předávají čistá data do podnikových systémů. Pokrývám celý životní cyklus, od návrhu promptů po provoz a podporu v produkci.",
+ "How a document automation flows": "Jak probíhá automatizované zpracování dokumentu",
+ "Run a valid document": "Zpracovat bezchybný dokument",
+ "Run a document with an error": "Zpracovat dokument s chybou",
+ "Stages of an automation": "Fáze automatizace",
+ "<span class=\"n\">1</span>Take in": "<span class=\"n\">1</span>Příjem",
+ "<span class=\"n\">2</span>Understand": "<span class=\"n\">2</span>Porozumění",
+ "<span class=\"n\">3</span>Check": "<span class=\"n\">3</span>Kontrola",
+ "<span class=\"n\">4</span>Hand off": "<span class=\"n\">4</span>Předání",
+ "<span class=\"n\">5</span>Run and support": "<span class=\"n\">5</span>Provoz a podpora",
+ "Support: what I do when a process fails": "Podpora: postup při selhání procesu",
+ "Error report": "Chybový report",
+ "Logs and analysis": "Logy a analýza",
+ "Fix deployed": "Nasazení opravy",
+ "A general picture of the kind of work, not a copy of any product. Customer projects, code and product details stay confidential.": "Jde o obecnou ilustraci typu práce, nikoli o kopii konkrétního produktu. Zákaznické projekty, kód a detaily produktů jsou důvěrné.",
+ "Where I have written code, from the first experiments to today.": "Přehled mé programátorské praxe od prvních projektů po současnost.",
+ "AI-driven automation for enterprise customers. More in the section above.": "AI automatizace pro firemní zákazníky. Podrobnosti v sekci výše.",
+ "Programmer, Perl and Python": "Programátor (Perl, Python)",
+ "GATEMA PCB a.s., 2023 to 2025": "GATEMA PCB a.s., 2023–2025",
+ "Maintained and extended a proprietary Perl codebase of more than 450,000 lines for printed circuit board production. Built production scripts, GUI applications and database interfaces, automated workflows around Helios Nephrite ERP and InCAM Pro, and improved logging and output control.": "Údržba a rozvoj proprietárního systému v Perlu o rozsahu přes 450 000 řádků pro výrobu desek plošných spojů. Vývoj produkčních skriptů, GUI aplikací a databázových rozhraní, automatizace procesů kolem ERP Helios Nephrite a InCAM Pro, zlepšení logování a kontroly výstupů.",
+ "Own projects alongside work": "Vlastní projekty",
+ "Ongoing since 2022": "Od roku 2022",
+ "Logistics tools, a trading bot with Pine Script strategies, and later multithreaded and async bots on Solana and LLM decision systems. See the projects below.": "Nástroje pro logistiku, obchodní bot se strategiemi v Pine Scriptu, později vícevláknové a asynchronní systémy na Solaně a rozhodovací systémy využívající LLM. Podrobnosti v sekci Projekty.",
+ "Trading internship in Montenegro": "Obchodní stáž v Černé Hoře",
+ "Two weeks with the founder of WhaleZone – CJ Fund": "Dvoutýdenní stáž u zakladatele WhaleZone – CJ Fund",
+ "Developed trading strategies together with a fundamental trader and mentor.": "Vývoj obchodních strategií pod vedením fundamentálního tradera a mentora.",
+ "First steps in game development": "Začátky ve vývoji her",
+ "Self-taught, with a mentor from an indie studio": "Samostudium s mentorem z nezávislého herního studia",
+ "Worked on a small game in Unity and on level design, and built the first version of this portfolio.": "Práce na menší hře v Unity a na level designu; vznikla také první verze tohoto portfolia.",
+ "Building with AI": "Vývoj s využitím AI",
+ "AI is part of what I build and of how I build it. I learned to program by hand before AI assistants were practical, which is what lets me direct them, understand what they produce and take responsibility for it.": "AI je součástí toho, co vyvíjím, i toho, jak vyvíjím. Programovat jsem se naučil ručně ještě před nástupem AI asistentů, a díky tomu je dokážu řídit, rozumím tomu, co vytvoří, a nesu za výsledek odpovědnost.",
+ "In what I build": "AI v mých řešeních",
+ "LLM workflows that turn unstructured documents into structured JSON.": "LLM workflow, která převádějí nestrukturované dokumenty na strukturovaný JSON.",
+ "AI decision engines that weigh data and context within clear rules.": "Rozhodovací systémy s AI, které vyhodnocují data a kontext v rámci jasně daných pravidel.",
+ "Trading bots that pass live market data to a language model and act on a structured answer.": "Obchodní systémy, které předávají aktuální tržní data jazykovému modelu a jednají podle jeho strukturované odpovědi.",
+ "Structured outputs": "Strukturované výstupy",
+ "In how I build": "AI ve vývojovém procesu",
+ "Coding agents for drafting, refactoring, tests and debugging, often several in parallel on separate tasks.": "Kódovací agenty využívám pro návrhy, refaktoring, testy a ladění, často několik souběžně na oddělených úlohách.",
+ "Every change has to be understood and checked against our team standards and tests before it is merged.": "Každé změně musím porozumět a před začleněním ji ověřit podle týmových standardů a testů.",
+ "I set the direction and stay responsible for what goes to production.": "Určuji směr a odpovídám za to, co jde do produkce.",
+ "Gemini and Antigravity": "Gemini a Antigravity",
+ "How I split the work with AI agents": "Rozdělení práce s AI agenty",
+ "Phase": "Fáze",
+ "Plan": "Plán",
+ "Build in parallel": "Souběžný vývoj",
+ "Review": "Revize",
+ "Test": "Testy",
+ "Debug": "Ladění",
+ "An illustration of the working pattern, not a real transcript.": "Ilustrace pracovního postupu, nikoli skutečný přepis.",
+ "Projects": "Projekty",
+ "Side projects from the last four years. The early ones were written by hand in 2022 and early 2023, before AI coding assistants were part of everyday work, and they are where most of my Python fundamentals come from.": "Vlastní projekty z posledních čtyř let. Ty nejstarší jsem psal ručně v roce 2022 a na začátku roku 2023, ještě před rozšířením AI asistentů, a právě na nich jsem získal většinu základů v Pythonu.",
+ "Trading and DeFi": "Trading a DeFi",
+ "Systems that read the market and act on it. Both current bots run on Solana as multithreaded, asynchronous Python applications working with live data streams. Strategy details stay private.": "Systémy, které sledují trh a reagují na něj. Oba aktuální systémy běží na Solaně jako vícevláknové asynchronní aplikace v Pythonu pracující s živými datovými proudy. Detaily strategií jsou neveřejné.",
+ "Current": "Aktuální",
+ "Cloud, 24/7": "Cloud, provoz 24/7",
+ "Active": "V provozu",
+ "My most recent bot. It manages concentrated liquidity positions and works to limit their exposure to price moves, deciding when a position should be adjusted and when to leave it alone.": "Můj nejnovější systém. Spravuje pozice s koncentrovanou likviditou, omezuje jejich expozici vůči pohybům ceny a vyhodnocuje, kdy pozici upravit a kdy ji ponechat beze změny.",
+ "It runs autonomously 24/7 on a cloud Linux server, where it moved from an on-premise machine. Next to the trading logic, the project covers deployment and stable unattended operation.": "Běží autonomně v režimu 24/7 na cloudovém linuxovém serveru, kam byl přesunut z lokálního serveru. Součástí projektu je tak vedle obchodní logiky i nasazení a stabilní provoz bez dohledu.",
+ "The logic is private, so there is no public source.": "Logika je neveřejná, zdrojový kód proto není k dispozici.",
+ "A liquidity provision bot for the USDC/USDT stablecoin pair. It manages a concentrated liquidity (CLMM) position, and because both tokens are stablecoins, the price risk is much lower than with volatile pairs. Written entirely in Python. The \"Liquidity range bot\" mode in the chart at the top of the page shows the general principle.": "Bot pro poskytování likvidity na stablecoinovém páru USDC/USDT. Spravuje pozici s koncentrovanou likviditou (CLMM); protože jsou oba tokeny stablecoiny, je cenové riziko výrazně nižší než u volatilních párů. Celý je napsaný v Pythonu. Základní princip ukazuje režim „Bot likviditního rozsahu“ na začátku stránky.",
+ "AppKiller on GitHub": "AppKiller na GitHubu",
+ "AudioSwitch on GitHub": "AudioSwitch na GitHubu",
+ "LLM decision bots": "Rozhodovací systémy s LLM",
+ "Python, OpenAI and Claude APIs": "Python, OpenAI a Claude API",
+ "Bots that pass live indicator data and market context to a language model, get a structured decision back and execute it automatically.": "Systémy, které předávají jazykovému modelu aktuální data z indikátorů a kontext trhu, získají strukturované rozhodnutí a automaticky ho provedou.",
+ "Allrounder trading bot": "Obchodní systém Allrounder",
+ "Hand-written, 2022": "Psáno ručně, 2022",
+ "A scalping strategy for 5 to 15 minute charts, written in Pine Script on TradingView. Signals arrive by e-mail; the Python engine parses them, places a limit order, leaves it in the order book while the price is good and re-prices it when the market moves. The \"Limit order bot\" mode at the top of the page is this loop.": "Scalpingová strategie pro 5–15minutové grafy napsaná v Pine Scriptu na TradingView. Signály přicházejí e-mailem; engine v Pythonu je zpracuje, zadá limitní příkaz, ponechá ho v knize objednávek, dokud je cena výhodná, a při pohybu trhu ho přecení. Tento princip ukazuje režim „Bot s limitními příkazy“ na začátku stránky.",
+ "Source on GitHub": "Zdrojový kód na GitHubu",
+ "Strategy on TradingView": "Strategie na TradingView",
+ "Web page scoring bot for Telegram": "Hodnocení webových stránek s výstupem do Telegramu",
+ "Uses an AI API to score web pages and posts the results to a Telegram channel.": "Pomocí AI API hodnotí webové stránky a výsledky publikuje do kanálu na Telegramu.",
+ "Logistics tools": "Nástroje pro logistiku",
+ "Written to save time in my logistics job.": "Vznikly pro zefektivnění mé práce v logistice.",
+ "Invoice to packing list converter": "Převod faktur na balicí listy",
+ "Reads a specific type of PDF invoice, extracts the key data and fills it into a predefined Excel packing list. Packaging dimensions are entered quickly, so a complete packing list takes minutes instead of manual retyping. A related tool turns invoices into price lists.": "Načte určitý typ PDF faktury, vytěží klíčové údaje a doplní je do předpřipravené šablony balicího listu v Excelu. Rozměry balení se zadávají rychle, takže kompletní balicí list je hotový během několika minut místo ručního přepisování. Související nástroj převádí faktury na ceníky.",
+ "Customs code (HS) finder": "Vyhledávání celních kódů (HS)",
+ "Collects HS codes that were actually used in export and import, cleans them into a local database, and finds the best match for a product description, so people without customs knowledge can find a code.": "Shromažďuje HS kódy skutečně použité při exportu a importu, čistí je do lokální databáze a k popisu zboží vyhledá nejvhodnější kód. Kód tak dohledá i uživatel bez znalosti celní problematiky.",
+ "Quick volume calculator": "Rychlý výpočet objemu",
+ "Calculates volume and volumetric weight, stores rows in a pandas DataFrame, exports to CSV or Excel and predicts whether a package is a pallet or a carton. A simplified version runs <a href=\"#calc\">further down this page</a>.": "Počítá objem a objemovou hmotnost, ukládá záznamy do pandas DataFrame, exportuje do CSV nebo Excelu a odhaduje, zda jde o paletu, nebo karton. Zjednodušenou verzi si můžete vyzkoušet <a href=\"#calc\">níže na této stránce</a>.",
+ "Desktop apps and learning": "Desktopové aplikace a studijní projekty",
+ "AppKiller and AudioSwitch": "AppKiller a AudioSwitch",
+ "Two small desktop utilities: one for closing applications quickly, one for switching audio outputs. Built with an object-oriented structure.": "Dva menší desktopové nástroje: jeden pro rychlé ukončování aplikací, druhý pro přepínání zvukových výstupů. Navrženo objektově.",
+ "Self-training chatbot": "Samoučící chatbot",
+ "A chatbot on a deep neural network. Wrong answers can be corrected during the chat, and the network retrains after a restart.": "Chatbot postavený na hluboké neuronové síti. Chybné odpovědi lze během konverzace opravit a síť se po restartu přetrénuje.",
+ "NumPy basics trainer": "Výukový nástroj pro NumPy",
+ "A study tool that walks through NumPy code blocks with my own notes.": "Studijní pomůcka, která prochází ukázky kódu v NumPy s vlastními komentáři.",
+ "Try one of my tools": "Ukázka nástroje",
+ "A simplified version of my Quick Volume Calculator. Drag the sliders: it works out the total volume, the total weight and the volumetric weight, and decides whether the piece is a pallet or a carton.": "Zjednodušená verze mého nástroje Quick Volume Calculator. Po nastavení rozměrů vypočítá celkový objem, celkovou hmotnost a objemovou hmotnost a určí, zda jde o paletu, nebo karton.",
+ "Quantity": "Počet kusů",
+ "Length": "Délka",
+ "Width": "Šířka",
+ "Height": "Výška",
+ "Weight per piece": "Hmotnost kusu",
+ "Total volume": "Celkový objem",
+ "Total weight": "Celková hmotnost",
+ "Volumetric weight": "Objemová hmotnost",
+ "Packing": "Typ balení",
+ "As in the original tool, volumetric weight uses the 167 kg per m³ standard, and a piece counts as a pallet when its base is at least 80 × 60 cm.": "Stejně jako v původním nástroji se objemová hmotnost počítá podle standardu 167 kg na m³ a kus se považuje za paletu, pokud má podstavu alespoň 80 × 60 cm.",
+ "Package drawn to scale": "Zásilka v měřítku",
+ "Toolbox": "Technologie",
+ "What I use day to day, and what I have worked with before.": "Co používám v každodenní práci a s čím mám zkušenosti z dřívějška.",
+ "Languages": "Programovací jazyky",
+ "AI and automation": "AI a automatizace",
+ "OpenAI and Claude APIs": "OpenAI a Claude API",
+ "Structured JSON extraction": "Vytěžování do strukturovaného JSON",
+ "PDF and invoice extraction": "Vytěžování PDF a faktur",
+ "AI decision engines": "Rozhodovací systémy s AI",
+ "Infrastructure": "Infrastruktura",
+ "CI/CD basics": "Základy CI/CD",
+ "Structured logging": "Strukturované logování",
+ "Apps and enterprise systems": "Aplikace a podnikové systémy",
+ "About": "O mně",
+ "I have been curious about how computers work for as long as I can remember. Before programming I spent seven years in international transport and purchasing, after a master's degree in transport management. My first scripts were written to take the repetitive parts out of that work.": "Počítače a jejich fungování mě zajímají dlouhodobě. Po magisterském studiu v oboru řízení dopravy jsem sedm let působil v mezinárodní přepravě a nákupu. První skripty vznikly s cílem automatizovat opakované činnosti v této práci.",
+ "In 2023 I moved to programming full time. I now work on AI automation in Python, and in my own time I build trading and DeFi bots.": "V roce 2023 jsem přešel k programování na plný úvazek. V současnosti se věnuji AI automatizaci v Pythonu a ve volném čase vyvíjím obchodní a DeFi systémy.",
+ "English at B2 level, Czech native.": "Angličtina na úrovni B2, čeština jako rodný jazyk.",
+ "Published scripts": "Publikované skripty",
+ "HTML, CSS and JavaScript, no frameworks": "HTML, CSS a JavaScript bez frameworků"
+};
+  var META = {
+    en: { title: 'Ondřej Zelík – Python & AI automation developer', desc: 'Python and AI automation developer. LLM workflows, document processing, trading and DeFi bots, and a background in logistics.' },
+    cz: { title: 'Ondřej Zelík – Python vývojář, AI automatizace', desc: 'Python vývojář se zaměřením na AI automatizaci: LLM workflow, zpracování dokumentů, obchodní a DeFi systémy a zázemí v logistice.' }
+  };
+  var lang = 'en', listeners = [];
+  try {
+    var saved = localStorage.getItem('oz-lang');
+    if (saved === 'cz' || saved === 'en') lang = saved;
+    else if (/^cs/i.test(navigator.language || '')) lang = 'cz';
+  } catch (e) {}
+
+  window.OZ = {
+    get lang() { return lang; },
+    t: function (x) { return typeof x === 'string' ? x : (x[lang] || x.en); },
+    dec: function (s) { return lang === 'cz' ? String(s).replace(/\./g, ',') : String(s); },
+    on: function (fn) { listeners.push(fn); }
+  };
+
+  var SKIP = { k1: 1, k2: 1, k3: 1, k4: 1, themeBtn: 1, langBtn: 1, copyMail: 1, hint: 1, termPause: 1, termState: 1 };
+  var INLINE = { A: 1, SPAN: 1, SMALL: 1, STRONG: 1, EM: 1, B: 1, I: 1, BR: 1, CODE: 1 };
+  var nodes = [], attrs = [];
+  function norm(s) { return s.replace(/\s+/g, ' ').trim(); }
+  function isTr(el) {
+    var has = false;
+    for (var c = el.firstChild; c; c = c.nextSibling) {
+      if (c.nodeType === 3) { if (c.nodeValue.trim()) has = true; }
+      else if (c.nodeType === 1 && !INLINE[c.tagName]) return false;
+    }
+    return has;
+  }
+  function walk(el) {
+    if (el.nodeType !== 1 || el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
+    if (el.hasAttribute('aria-label')) { var a = el.getAttribute('aria-label'); if (DICT[a]) attrs.push({ el: el, en: a }); }
+    if (SKIP[el.id]) return;
+    if (isTr(el)) { var en = el.innerHTML, key = norm(en); if (DICT[key]) nodes.push({ el: el, en: en, key: key }); return; }
+    for (var c = el.firstElementChild; c; c = c.nextElementSibling) walk(c);
+  }
+  walk(document.body);
+
+  var btn = document.getElementById('langBtn');
+  function apply() {
+    nodes.forEach(function (n) { n.el.innerHTML = lang === 'cz' ? DICT[n.key] : n.en; });
+    attrs.forEach(function (a) { a.el.setAttribute('aria-label', lang === 'cz' ? DICT[a.en] : a.en); });
+    document.documentElement.lang = lang === 'cz' ? 'cs' : 'en';
+    document.title = META[lang].title;
+    var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute('content', META[lang].desc);
+    var og = document.querySelector('meta[property="og:description"]'); if (og) og.setAttribute('content', META[lang].desc);
+    btn.textContent = lang === 'cz' ? 'EN' : 'CZ';
+    listeners.forEach(function (fn) { fn(); });
+  }
+  btn.addEventListener('click', function () {
+    lang = lang === 'cz' ? 'en' : 'cz';
+    try { localStorage.setItem('oz-lang', lang); } catch (e) {}
+    apply();
+  });
+  window.OZ.apply = apply;
+  if (lang === 'cz') apply(); else { btn.textContent = 'CZ'; }
+})();
+
+/* ---------- Theme (dark by default, sun / moon toggle) ---------- */
+(function () {
+  var OZ = window.OZ, root = document.documentElement, btn = document.getElementById('themeBtn');
+  var SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  function label() {
+    var dark = root.getAttribute('data-theme') !== 'light';
+    btn.innerHTML = dark ? SUN : MOON;
+    btn.setAttribute('aria-label', dark ? OZ.t({ en: 'Switch to light theme', cz: 'Přepnout na světlý motiv' }) : OZ.t({ en: 'Switch to dark theme', cz: 'Přepnout na tmavý motiv' }));
+    btn.title = btn.getAttribute('aria-label');
+  }
+  function set(t) {
+    root.setAttribute('data-theme', t); label();
+    try { localStorage.setItem('oz-theme', t); } catch (e) {}
+    document.dispatchEvent(new Event('themechange'));
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('oz-theme'); } catch (e) {}
+  set(saved === 'light' ? 'light' : 'dark');
+  btn.addEventListener('click', function () { set(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light'); });
+  OZ.on(label);
+})();
+
+/* ---------- Hero simulation: limit order bot (buy, then sell) and liquidity range bot ---------- */
+(function () {
+  var OZ = window.OZ, T = OZ.t, dec = OZ.dec;
+  var hero = document.getElementById('hero'), canvas = document.getElementById('book'), ctx = canvas.getContext('2d');
+  var k = [1, 2, 3, 4].map(function (i) { return document.getElementById('k' + i); });
+  var v = [1, 2, 3, 4].map(function (i) { return document.getElementById('v' + i); });
+  var hint = document.getElementById('hint'), shake = document.getElementById('shake');
+  var modeBtns = document.querySelectorAll('[data-mode]');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse = window.matchMedia('(pointer: coarse)').matches;
+
+  var STEP = 3, OFFSET = 0.07, SOFF = 0.045, HALF = 0.09, MINP = 0.03, DT = 1000 / 60, SIZE = 10, FEE = 0.0004, GAS = 0.75, SMAX = 0.93;
+  var W = 0, H = 0, chipW = 104, C = {};
+  var mode = 'order', quiet = false, feedDown = false;
+  var price = [], lineA = [], lineB = [], lineE = [];
+  var p = 0.5, vel = 0, target = null, n = 0;
+  var state = 'buy', o = p - OFFSET, s = NaN, entry = NaN, reprices = 0, sells = 0, pnl = 0, flashes = [], pops = [];
+  var lo = p - HALF, hi = p + HALF, outFor = 0, rebal = 0, inTicks = 0, allTicks = 0, fees = 0;
+  var running = false, raf = 0, last = 0, acc = 0, heroVis = true, termVis = false;
+
+  function pr(f) { return 100 + (f - 0.5) * 30; }
+  function num(f) { return pr(f).toFixed(2); }
+  function log(lv, msg) { if (quiet) return; document.dispatchEvent(new CustomEvent('botlog', { detail: { lv: lv, msg: msg } })); }
+  function sgn(x) { return (x >= 0 ? '+' : '') + x.toFixed(2); }
+
+  function hintText() {
+    if (reduce) return T({ en: 'Animation is off because your device asks for reduced motion. This is a still frame.', cz: 'Animace je vypnutá, protože zařízení vyžaduje omezení pohybu. Zobrazen je statický snímek.' });
+    var act = coarse ? { en: 'Tap the chart to move the price.', cz: 'Klepnutím do grafu posunete cenu.' } : { en: 'Move your cursor over the chart and the price follows.', cz: 'Pohybem kurzoru nad grafem ovládáte cenu.' };
+    if (mode === 'order') return T(act) + ' ' + T({ en: 'The orange line is the buy limit order. Once it fills, a green sell order is placed above the entry price, which is shown as a dashed line.', cz: 'Oranžová linie je nákupní limitní příkaz. Po jeho vyplnění se nad vstupní cenou, vyznačenou přerušovanou linií, zadá zelený prodejní příkaz.' });
+    return T(act) + ' ' + T({ en: 'The band is a liquidity position: it earns fees while the price stays inside, and the bot moves it when the price stays outside for too long.', cz: 'Pásmo představuje likviditní pozici: dokud je cena uvnitř, generuje poplatky, a pokud cena zůstane mimo příliš dlouho, bot pozici přesune.' });
+  }
+
+  function colors() {
+    var cs = getComputedStyle(document.documentElement);
+    function g(x) { return cs.getPropertyValue(x).trim(); }
+    C = { ink: g('--ink'), rule: g('--rule'), orange: g('--orange'), peach: g('--peach'), panel: g('--panel'), paper: g('--paper'), onOrange: g('--on-orange'), good: g('--good') };
+  }
+  var bTop = 0, bH = 100;
+  function measure() {
+    var hr = hero.getBoundingClientRect();
+    var lead = hero.querySelector('.lead').getBoundingClientRect();
+    var bot = hero.querySelector('.hero-bottom').getBoundingClientRect();
+    var top = lead.bottom - hr.top + 24, bottom = bot.top - hr.top + (W < 900 ? -10 : 14);
+    if (W >= 900) top = Math.min(top, H * 0.22);
+    if (bottom - top < 110) { top = H * 0.42; bottom = H - Math.max(120, H * 0.2); }
+    bTop = top; bH = Math.max(60, bottom - top);
+  }
+  function y(f) { return bTop + (1 - f) * bH; }
+  function fromY(py) { return Math.min(0.94, Math.max(0.06, 1 - (py - bTop) / bH)); }
+
+  function curA() { return mode === 'order' ? (state === 'buy' ? o : NaN) : lo; }
+  function curB() { return mode === 'order' ? (state === 'sell' ? s : NaN) : hi; }
+  function curE() { return mode === 'order' && state === 'sell' ? entry : NaN; }
+
+  function resize() {
+    var r = hero.getBoundingClientRect();
+    W = r.width; H = r.height;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    chipW = W < 480 ? 64 : 106;
+    measure();
+    var len = Math.ceil(W / STEP) + 2;
+    [[price, p], [lineA, curA()], [lineB, curB()], [lineE, curE()]].forEach(function (pair) {
+      var arr = pair[0], fill = pair[1];
+      while (arr.length < len) arr.unshift(arr.length ? arr[0] : fill);
+      while (arr.length > len) arr.shift();
+    });
+    colors(); draw();
+  }
+
+  function reset() {
+    state = 'buy'; o = p - OFFSET; s = NaN; entry = NaN; reprices = 0; sells = 0; pnl = 0; flashes = []; pops = [];
+    lo = p - HALF; hi = p + HALF; outFor = 0; rebal = 0; inTicks = 0; allTicks = 0; fees = 0;
+    for (var i = 0; i < lineA.length; i++) { lineA[i] = curA(); lineB[i] = curB(); lineE[i] = NaN; }
+  }
+
+  function step() {
+    if (feedDown) return;
+    n++;
+    if (target !== null) vel += (target - p) * 0.035 + (Math.random() - 0.5) * 0.003;
+    else vel += (0.5 - p) * 0.0008 + (Math.random() - 0.5) * 0.007;
+    vel *= 0.9; p += vel;
+    if (p < 0.05) { p = 0.05; vel = Math.abs(vel) * 0.3; }
+    if (p > 0.95) { p = 0.95; vel = -Math.abs(vel) * 0.3; }
+    if (n % 600 === 0) log('INFO', 'heartbeat ok, feed latency ' + (28 + Math.floor(Math.random() * 30)) + ' ms');
+
+    if (mode === 'order') {
+      if (state === 'buy') {
+        if (n % 24 === 0 && Math.abs((p - OFFSET) - o) > 0.05) { o = Math.max(0.02, p - OFFSET); reprices++; log('BUY', 'limit re-priced to ' + num(o)); }
+        if (p <= o) {
+          entry = o; state = 'sell'; flashes.push({ age: 0, f: o, c: 'buy' });
+          log('BUY', 'filled @ ' + num(entry) + ' x' + SIZE);
+          s = Math.min(SMAX, Math.max(entry + MINP, p + SOFF));
+          log('SELL', 'limit placed @ ' + num(s));
+        }
+      } else {
+        if (n % 24 === 0) {
+          var want = Math.min(SMAX, Math.max(entry + MINP, p + SOFF));
+          if (s - want > 0.04) { s = want; reprices++; log('SELL', 'limit re-priced to ' + num(s)); }
+        }
+        if (p >= s) {
+          var net = (pr(s) - pr(entry)) * SIZE - (pr(entry) + pr(s)) * SIZE * FEE;
+          pnl += net; sells++;
+          flashes.push({ age: 0, f: s, c: 'sell' }); pops.push({ age: 0, f: s, txt: sgn(net) });
+          log('SELL', 'filled @ ' + num(s) + ' x' + SIZE + ', profit ' + sgn(net) + ' USDT, total ' + sgn(pnl));
+          state = 'buy'; o = Math.max(0.02, p - OFFSET); entry = NaN; s = NaN;
+          log('BUY', 'limit placed @ ' + num(o) + ' x' + SIZE);
+        }
+      }
+    } else {
+      allTicks++;
+      if (p >= lo && p <= hi) { inTicks++; outFor = 0; fees += 0.002 + Math.abs(vel) * 0.3; }
+      else if (++outFor > 45) {
+        var a = lo, b = hi; lo = p - HALF; hi = p + HALF; outFor = 0; rebal++; fees -= GAS;
+        flashes.push({ age: 0, f: p, c: 'buy' });
+        log('LP', 'price outside range for 0.75 s, range ' + num(a) + '-' + num(b) + ' moved to ' + num(lo) + '-' + num(hi) + ', gas -' + GAS.toFixed(2));
+      }
+    }
+    price.push(p); lineA.push(curA()); lineB.push(curB()); lineE.push(curE());
+    price.shift(); lineA.shift(); lineB.shift(); lineE.shift();
+    flashes.forEach(function (f) { f.age++; }); flashes = flashes.filter(function (f) { return f.age < 70; });
+    pops.forEach(function (f) { f.age++; }); pops = pops.filter(function (f) { return f.age < 100; });
+  }
+
+  function stepLine(arr, x, color, w, dash) {
+    ctx.lineJoin = 'miter'; ctx.lineCap = 'butt'; ctx.lineWidth = w; ctx.strokeStyle = color; ctx.setLineDash(dash || []);
+    ctx.beginPath(); var open = false;
+    for (var i = 0; i < arr.length; i++) {
+      var xx = x(i); if (xx < -STEP) continue;
+      var val = arr[i];
+      if (val !== val) { open = false; continue; }
+      var yy = y(val);
+      if (!open) { ctx.moveTo(xx, yy); open = true; }
+      else { var pv = arr[i - 1]; if (pv === pv) ctx.lineTo(xx, y(pv)); ctx.lineTo(xx, yy); }
+    }
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+
+  var X = function () { return 0; };
+  function draw() {
+    if (!W) return;
+    ctx.clearRect(0, 0, W, H);
+    var len = price.length, right = W - chipW - 14;
+    function x(i) { return right - (len - 1 - i) * STEP; }
+    ctx.setLineDash([]);
+    ctx.lineWidth = 1; ctx.strokeStyle = C.rule;
+    ctx.beginPath();
+    for (var g = 0; g <= 6; g++) { var gy = Math.round(bTop + g / 6 * bH) + 0.5; ctx.moveTo(0, gy); ctx.lineTo(W, gy); }
+    ctx.stroke();
+
+    if (mode === 'lp') {
+      ctx.beginPath();
+      for (var i = 0; i < len; i++) { var xx = x(i); if (xx < -STEP) continue; ctx.lineTo(xx, y(lineB[i])); }
+      for (var j = len - 1; j >= 0; j--) { var x2 = x(j); if (x2 < -STEP) break; ctx.lineTo(x2, y(lineA[j])); }
+      ctx.closePath();
+      ctx.fillStyle = C.peach; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+      stepLine(lineA, x, C.orange, 2.5); stepLine(lineB, x, C.orange, 2.5);
+    }
+
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.lineWidth = 2.5; ctx.strokeStyle = C.ink;
+    ctx.beginPath();
+    var started = false;
+    for (var q = 0; q < len; q++) { var px = x(q); if (px < -STEP) continue; var py = y(price[q]); if (!started) { ctx.moveTo(px, py); started = true; } else ctx.lineTo(px, py); }
+    ctx.stroke();
+
+    if (mode === 'order') {
+      ctx.globalAlpha = 0.75; stepLine(lineE, x, C.ink, 1.5, [6, 5]); ctx.globalAlpha = 1;
+      stepLine(lineA, x, C.orange, 4);
+      stepLine(lineB, x, C.good, 4);
+    }
+
+    flashes.forEach(function (f) {
+      ctx.globalAlpha = 1 - f.age / 70; ctx.lineWidth = 3; ctx.strokeStyle = f.c === 'sell' ? C.good : C.orange;
+      ctx.beginPath(); ctx.arc(right - f.age * STEP, y(f.f), 6 + f.age * 0.7, 0, Math.PI * 2); ctx.stroke();
+    });
+    ctx.font = '600 14px "DM Mono", ui-monospace, Menlo, monospace'; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+    pops.forEach(function (f) {
+      ctx.globalAlpha = 1 - f.age / 100; ctx.fillStyle = C.good;
+      ctx.fillText(f.txt, right - f.age * STEP - 18, y(f.f) - 18 - f.age * 0.45);
+    });
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(right, y(p), 5, 0, Math.PI * 2); ctx.fill();
+
+    ctx.font = '500 12px "DM Mono", ui-monospace, Menlo, monospace';
+    var nar = W < 480, chips = [{ cy: y(p), bg: C.ink, fg: C.paper, t: dec(num(p)) }];
+    if (mode === 'order') {
+      if (state === 'buy') chips.push({ cy: y(o), bg: C.orange, fg: C.onOrange, t: (nar ? '' : T({ en: 'Buy ', cz: 'Nákup ' })) + dec(num(o)) });
+      else chips.push({ cy: y(s), bg: C.good, fg: C.onOrange, t: (nar ? '' : T({ en: 'Sell ', cz: 'Prodej ' })) + dec(num(s)) });
+    } else {
+      chips.push({ cy: y(hi), bg: C.orange, fg: C.onOrange, t: (nar ? '' : T({ en: 'Top ', cz: 'Horní ' })) + dec(num(hi)) });
+      chips.push({ cy: y(lo), bg: C.orange, fg: C.onOrange, t: (nar ? '' : T({ en: 'Low ', cz: 'Dolní ' })) + dec(num(lo)) });
+    }
+    chips.sort(function (a, b) { return a.cy - b.cy; });
+    for (var ci = 1; ci < chips.length; ci++) if (chips[ci].cy - chips[ci - 1].cy < 26) chips[ci].cy = chips[ci - 1].cy + 26;
+    chips.forEach(function (c) { ctx.fillStyle = c.bg; ctx.fillRect(right + 10, c.cy - 12, chipW, 24); ctx.fillStyle = c.fg; ctx.fillText(c.t, right + 17, c.cy + 0.5); });
+
+    if (feedDown) {
+      ctx.font = '600 13px "DM Mono", ui-monospace, Menlo, monospace';
+      var msg = T({ en: 'Price feed lost, reconnecting', cz: 'Výpadek cenového feedu, připojuji se' });
+      var w = ctx.measureText(msg).width + 24;
+      ctx.fillStyle = C.ink; ctx.fillRect(14, bTop + 10, w, 28);
+      ctx.fillStyle = C.paper; ctx.fillText(msg, 26, bTop + 24.5);
+    }
+  }
+
+  var pl = [], pv = [];
+  function hud() {
+    var L, V;
+    if (mode === 'order') {
+      L = [state === 'buy' ? T({ en: 'Buy limit', cz: 'Nákupní limit' }) : T({ en: 'Sell limit', cz: 'Prodejní limit' }),
+           T({ en: 'Re-priced', cz: 'Přecenění' }), T({ en: 'Round trips', cz: 'Uzavřené obchody' }), T({ en: 'Sim. profit, USDT', cz: 'Sim. zisk, USDT' })];
+      V = [dec(num(state === 'buy' ? o : s)), String(reprices), String(sells), dec(sgn(pnl))];
+    } else {
+      L = [T({ en: 'In range', cz: 'V rozsahu' }), T({ en: 'Moved', cz: 'Přesunutí' }), T({ en: 'Range', cz: 'Rozsah' }), T({ en: 'Sim. fees, USDT', cz: 'Sim. poplatky, USDT' })];
+      V = [(allTicks ? Math.round(inTicks / allTicks * 100) : 100) + '%', String(rebal), dec(num(lo) + '–' + num(hi)), dec(sgn(fees))];
+    }
+    for (var i = 0; i < 4; i++) {
+      if (L[i] !== pl[i]) { k[i].textContent = L[i]; pl[i] = L[i]; }
+      if (V[i] !== pv[i]) { v[i].textContent = V[i]; pv[i] = V[i]; }
+    }
+  }
+
+  function setMode(m) {
+    mode = m;
+    modeBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === m)); });
+    hint.textContent = hintText();
+    reset(); pl = []; pv = [];
+    if (reduce) { quiet = true; for (var i = 0; i < 500; i++) step(); quiet = false; }
+    else {
+      log('INFO', 'strategy: ' + (m === 'order' ? 'limit order bot (buy, then sell above entry)' : 'liquidity range bot'));
+      if (m === 'order') log('BUY', 'limit placed @ ' + num(o) + ' x' + SIZE);
+      else log('LP', 'range opened ' + num(lo) + '-' + num(hi));
+    }
+    draw(); hud();
+  }
+
+  function frame(now) {
+    if (!running) return;
+    if (!last) last = now;
+    acc += Math.min(now - last, 100); last = now;
+    while (acc >= DT) { step(); acc -= DT; }
+    draw(); hud();
+    raf = requestAnimationFrame(frame);
+  }
+  function start() { if (running || reduce) return; running = true; last = 0; acc = 0; raf = requestAnimationFrame(frame); }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+  function sync() { if ((heroVis || termVis) && !document.hidden) start(); else stop(); }
+
+  hero.addEventListener('pointermove', function (e) { if (reduce || e.pointerType === 'touch') return; target = fromY(e.clientY - hero.getBoundingClientRect().top); });
+  hero.addEventListener('pointerleave', function () { target = null; });
+  hero.addEventListener('pointerdown', function (e) {
+    if (reduce || e.pointerType !== 'touch' || e.target.closest('button')) return;
+    var f = fromY(e.clientY - hero.getBoundingClientRect().top); vel += (f > p ? 1 : -1) * 0.055;
+  });
+  shake.addEventListener('click', function () { vel += (Math.random() < 0.5 ? -1 : 1) * (0.05 + Math.random() * 0.04); });
+  modeBtns.forEach(function (b) { b.addEventListener('click', function () { setMode(b.dataset.mode); }); });
+
+  document.addEventListener('themechange', function () { colors(); draw(); });
+  OZ.on(function () { hint.textContent = hintText(); pl = []; pv = []; draw(); hud(); });
+  window.addEventListener('resize', resize);
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en) { heroVis = en[0].isIntersecting; sync(); }).observe(hero);
+  }
+
+  resize(); setMode('order'); sync();
+})();
+
+/* ---------- Aiviro pipeline: valid run, and a failed run handled through support ---------- */
+(function () {
+  var OZ = window.OZ;
+  var stages = [
+    { en: { t: 'Take in documents and data', p: 'Documents arrive from e-mail, shared folders, portals or APIs, some as digital text and some as scans. I build the parts that collect and sort them, with OCR where it is needed.', c: ['Python', 'OCR', 'PDF processing', 'REST APIs'], log: 'Document received and prepared' },
+      cz: { t: 'Příjem dokumentů a dat', p: 'Dokumenty přicházejí e-mailem, ze sdílených složek, portálů nebo přes API, a to jako digitální text i jako skeny. Vyvíjím části, které je shromažďují a třídí, včetně OCR tam, kde je potřeba.', c: ['Python', 'OCR', 'Zpracování PDF', 'REST API'], log: 'Dokument přijat a připraven ke zpracování' } },
+    { en: { t: 'Understand them with language models', p: 'LLM workflows read the document and return structured JSON. My part is prompt engineering, deciding what to extract, and making it reliable across many layouts and languages.', c: ['OpenAI and Claude APIs', 'Prompt engineering', 'Structured JSON'], log: 'Fields extracted by the model' },
+      cz: { t: 'Porozumění pomocí jazykových modelů', p: 'LLM workflow dokument zpracují a vrátí strukturovaný JSON. Odpovídám za návrh promptů, za určení vytěžovaných údajů a za spolehlivost napříč různými rozvrženími dokumentů a jazyky.', c: ['OpenAI a Claude API', 'Prompt engineering', 'Strukturovaný JSON'], log: 'Údaje vytěženy modelem' } },
+    { en: { t: 'Check before anything goes further', p: 'Results are validated against business rules and cross-checks. When something does not add up, the process stops and creates an error report, so wrong data never moves on.', c: ['Data validation', 'Error reports', 'Pytest'], log: 'All checks passed' },
+      cz: { t: 'Kontrola před dalším zpracováním', p: 'Výsledky se ověřují podle obchodních pravidel a křížových kontrol. Pokud něco nesouhlasí, proces se zastaví a vytvoří chybový report, takže chybná data nikdy nepostoupí dál.', c: ['Validace dat', 'Chybové reporty', 'Pytest'], log: 'Všechny kontroly prošly' } },
+    { en: { t: 'Hand the result to company systems', p: 'Validated data goes into the customer’s ERP and other business software, so nobody has to retype it.', c: ['ERP integration', 'RPA'], log: 'Delivered to the target system' },
+      cz: { t: 'Předání do podnikových systémů', p: 'Ověřená data se předávají do ERP zákazníka a dalších podnikových systémů, takže je nikdo nemusí ručně přepisovat.', c: ['Integrace s ERP', 'RPA'], log: 'Data předána do cílového systému' } },
+    { en: { t: 'Run and support it in production', p: 'I deploy and maintain the automations on Linux and in Docker, manage dependencies and versions, and handle Service Desk tickets: from the logs to the root cause and a deployed fix.', c: ['Linux', 'Docker', 'Git', 'SSH', 'Structured logging', 'Service Desk'], log: 'Logged for monitoring' },
+      cz: { t: 'Provoz a podpora v produkci', p: 'Automatizace nasazuji a udržuji na Linuxu a v Dockeru, spravuji závislosti a verze a řeším požadavky ze Service Desku: od logů přes analýzu příčiny až po nasazení opravy.', c: ['Linux', 'Docker', 'Git', 'SSH', 'Strukturované logování', 'Service Desk'], log: 'Zaznamenáno pro monitoring' } }
+  ];
+  var M = {
+    clean: { en: 'Valid document received', cz: 'Přijat bezchybný dokument' },
+    bad: { en: 'Document with an error received', cz: 'Přijat dokument s chybou' },
+    fail: { en: 'Validation failed: the total does not match the line items. Processing stopped.', cz: 'Validace selhala: celková částka neodpovídá položkám. Zpracování bylo zastaveno.' },
+    s0: { en: 'Error report created: document ID, stage, input and model output', cz: 'Vytvořen chybový report: ID dokumentu, fáze, vstup a výstup modelu' },
+    s1: { en: 'Service Desk ticket assigned to me', cz: 'Požadavek ze Service Desku přidělen k řešení' },
+    s2: { en: 'Complete prepared logs downloaded, root cause identified', cz: 'Staženy kompletní logy, příčina identifikována' },
+    s3: { en: 'Fix tested and deployed to production', cz: 'Oprava otestována a nasazena do produkce' },
+    re: { en: 'Document reprocessed, all checks passed', cz: 'Dokument znovu zpracován, všechny kontroly prošly' },
+    d1: { en: 'The document did not go through. An error report was created and passed to support.', cz: 'Dokument neprošel. Byl vytvořen chybový report a předán podpoře.' },
+    d2: { en: 'Resolved: the fix is in production and the document went through.', cz: 'Vyřešeno: oprava je v produkci a dokument prošel.' }
+  };
+  var LETTERS = ['A', 'B', 'C', 'D'];
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('#pipe [role=tab]'));
+  var panel = document.getElementById('pipePanel'), title = document.getElementById('pipeTitle'), text = document.getElementById('pipeText'), chips = document.getElementById('pipeChips');
+  var trace = document.getElementById('trace'), detour = document.getElementById('detour'), support = document.getElementById('support');
+  var sSteps = Array.prototype.slice.call(support.querySelectorAll('li'));
+  var bClean = document.getElementById('runClean'), bTricky = document.getElementById('runTricky');
+  var timers = [], cur = 0, entries = [], detourState = null;
+  function S(i) { return stages[i][OZ.lang]; }
+
+  function show(i, focus) {
+    cur = i;
+    tabs.forEach(function (b, j) { b.setAttribute('aria-selected', String(i === j)); b.tabIndex = i === j ? 0 : -1; });
+    panel.setAttribute('aria-labelledby', 't' + i);
+    title.textContent = S(i).t; text.textContent = S(i).p;
+    chips.innerHTML = '';
+    S(i).c.forEach(function (x) { var li = document.createElement('li'); li.textContent = x; chips.appendChild(li); });
+    if (focus) tabs[i].focus();
+  }
+  function renderTrace() {
+    trace.innerHTML = '';
+    entries.forEach(function (e) {
+      var li = document.createElement('li'), d = document.createElement('span');
+      d.className = 'dot'; d.style.background = e.kind === 'ok' ? 'var(--good)' : e.kind === 'err' ? 'var(--bad)' : 'var(--orange)';
+      li.appendChild(d); li.appendChild(document.createTextNode(OZ.t(e.m))); trace.appendChild(li);
+    });
+    if (detourState) { detour.hidden = false; detour.className = 'detour' + (detourState === 'fixed' ? ' fixed' : ''); detour.textContent = OZ.t(detourState === 'fixed' ? M.d2 : M.d1); }
+    else { detour.hidden = true; detour.className = 'detour'; }
+  }
+  function log(m, kind) { entries.push({ m: m, kind: kind }); renderTrace(); }
+  function reset() {
+    timers.forEach(clearTimeout); timers = [];
+    tabs.forEach(function (b, i) { b.classList.remove('done', 'err', 'busy'); b.querySelector('.n').textContent = String(i + 1); });
+    sSteps.forEach(function (li, i) { li.classList.remove('done', 'busy'); li.querySelector('.n').textContent = LETTERS[i]; });
+    support.hidden = true;
+    entries = []; detourState = null; renderTrace();
+  }
+  function run(tricky) {
+    reset();
+    bClean.disabled = bTricky.disabled = true;
+    var t = 0, STEP = 1400;
+    function at(ms, fn) { t += ms; timers.push(setTimeout(fn, t)); }
+    function begin(i) { show(i); tabs[i].classList.remove('err'); tabs[i].classList.add('busy'); }
+    function finish(i, m) { tabs[i].classList.remove('busy', 'err'); tabs[i].classList.add('done'); tabs[i].querySelector('.n').textContent = '✓'; log(m, 'ok'); }
+    function sBegin(i) { sSteps[i].classList.add('busy'); }
+    function sFinish(i, m, kind) { sSteps[i].classList.remove('busy'); sSteps[i].classList.add('done'); sSteps[i].querySelector('.n').textContent = '✓'; log(m, kind || 'info'); }
+    function lg(i) { return { en: stages[i].en.log, cz: stages[i].cz.log }; }
+
+    at(0, function () { log(tricky ? M.bad : M.clean, 'info'); begin(0); });
+    at(STEP, function () { finish(0, lg(0)); begin(1); });
+    at(STEP, function () { finish(1, lg(1)); begin(2); });
+    if (tricky) {
+      at(STEP, function () {
+        tabs[2].classList.remove('busy'); tabs[2].classList.add('err');
+        log(M.fail, 'err'); detourState = 'fail'; support.hidden = false; renderTrace(); sBegin(0);
+      });
+      at(STEP, function () { sFinish(0, M.s0); sBegin(1); });
+      at(STEP, function () { sFinish(1, M.s1); sBegin(2); });
+      at(STEP * 1.4, function () { sFinish(2, M.s2); sBegin(3); });
+      at(STEP, function () { sFinish(3, M.s3, 'ok'); detourState = 'fixed'; renderTrace(); begin(2); });
+      at(STEP, function () { finish(2, M.re); begin(3); });
+    } else {
+      at(STEP, function () { finish(2, lg(2)); begin(3); });
+    }
+    at(STEP, function () { finish(3, lg(3)); begin(4); });
+    at(STEP, function () { finish(4, lg(4)); bClean.disabled = bTricky.disabled = false; });
+  }
+
+  tabs.forEach(function (b, i) {
+    b.addEventListener('click', function () { show(i); });
+    b.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); show((i + 1) % tabs.length, true); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show((i + tabs.length - 1) % tabs.length, true); }
+    });
+  });
+  bClean.addEventListener('click', function () { run(false); });
+  bTricky.addEventListener('click', function () { run(true); });
+  OZ.on(function () {
+    tabs.forEach(function (b, i) { b.querySelector('.n').textContent = b.classList.contains('done') ? '✓' : String(i + 1); });
+    show(cur); renderTrace();
+  });
+  show(0);
+})();
+
+/* ---------- Working with AI ---------- */
+(function () {
+  var OZ = window.OZ;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function m(who, en, cz) { return [who, { en: en, cz: cz }]; }
+  var phases = [
+    [m('me', 'Here is the goal, the constraints and the data. Propose a structure and a few options.', 'Zde je cíl, omezení a dostupná data. Navrhni strukturu a několik variant řešení.'),
+     m('ai', 'Suggests modules, interfaces and alternative approaches.', 'Navrhne moduly, rozhraní a alternativní přístupy.'),
+     m('me', 'I choose the approach, remove what we do not need and record the decisions.', 'Zvolím přístup, odstraním, co není potřeba, a rozhodnutí zdokumentuji.')],
+    [m('me', 'Agent 1: the parser module. Agent 2: tests for the existing API. Each on its own branch.', 'Agent 1: modul parseru. Agent 2: testy stávajícího API. Každý ve vlastní větvi.'),
+     m('ai', 'Both agents work at the same time and stop when they need a decision.', 'Oba agenti pracují souběžně a zastaví se, když potřebují rozhodnutí.'),
+     m('me', 'Meanwhile I work on the integration myself and switch between the tasks when needed.', 'Mezitím sám pracuji na integraci a mezi úlohami přepínám podle potřeby.')],
+    [m('me', 'Show me the diff and explain every change.', 'Ukaž mi diff a vysvětli každou změnu.'),
+     m('ai', 'Explains the changes and points out the risky parts.', 'Vysvětlí změny a upozorní na riziková místa.'),
+     m('me', 'I read the code until I understand every line and check it against our team standards: structure, naming, logging and tests. Code I cannot explain does not get merged.', 'Kód procházím, dokud nerozumím každému řádku, a kontroluji ho podle týmových standardů: struktura, pojmenování, logování a testy. Kód, který nedokážu vysvětlit, do projektu nezačleňuji.')],
+    [m('me', 'List the edge cases and write pytest tests for them.', 'Sepiš okrajové případy a napiš pro ně testy v pytestu.'),
+     m('ai', 'Generates tests and test data.', 'Vygeneruje testy a testovací data.'),
+     m('me', 'I add the cases that only someone who knows the business and the customer would think of.', 'Doplním případy, které napadnou jen toho, kdo zná obchodní procesy a zákazníka.')],
+    [m('me', 'Here are the logs from a Service Desk ticket. What could cause this?', 'Zde jsou logy z požadavku ze Service Desku. Co může být příčinou?'),
+     m('ai', 'Offers hypotheses and places to look.', 'Nabídne hypotézy a místa, kam se podívat.'),
+     m('me', 'I reproduce the problem, confirm the cause and decide on the fix. What goes to production is my responsibility.', 'Problém zreprodukuji, ověřím příčinu a rozhodnu o opravě. Za to, co jde do produkce, odpovídám já.')]
+  ];
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[data-ph]'));
+  var thread = document.getElementById('thread'), timers = [], cur = 0, started = false;
+  function bubble(who, text) {
+    var d = document.createElement('div'); d.className = 'msg ' + who;
+    var w = document.createElement('span'); w.className = 'who'; w.textContent = who === 'me' ? OZ.t({ en: 'Me', cz: 'Já' }) : OZ.t({ en: 'AI agent', cz: 'AI agent' });
+    d.appendChild(w); d.appendChild(document.createTextNode(OZ.t(text))); thread.appendChild(d);
+  }
+  function play(i) {
+    cur = i; timers.forEach(clearTimeout); timers = []; thread.innerHTML = '';
+    tabs.forEach(function (b, j) { b.setAttribute('aria-selected', String(i === j)); });
+    var t = 0;
+    phases[i].forEach(function (msg) {
+      if (reduce) { bubble(msg[0], msg[1]); return; }
+      if (msg[0] === 'ai') {
+        timers.push(setTimeout(function () { var ty = document.createElement('div'); ty.className = 'typing'; ty.textContent = '…'; ty.id = 'typing'; thread.appendChild(ty); }, t));
+        t += 700;
+        timers.push(setTimeout(function () { var ty = document.getElementById('typing'); if (ty) ty.remove(); bubble(msg[0], msg[1]); }, t));
+      } else {
+        timers.push(setTimeout(function () { bubble(msg[0], msg[1]); }, t));
+      }
+      t += 750;
+    });
+  }
+  tabs.forEach(function (b, i) { b.addEventListener('click', function () { play(i); }); });
+  OZ.on(function () { if (started) { var r = reduce; reduce = true; play(cur); reduce = r; } });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (en, ob) { if (en[0].isIntersecting && !started) { started = true; play(0); ob.disconnect(); } }, { threshold: 0.4 }).observe(document.getElementById('collab'));
+  } else { started = true; play(0); }
+})();
+
+/* ---------- Quick Volume Calculator (same rules as Volume_Calculator.py) ---------- */
+(function () {
+  var OZ = window.OZ;
+  function $(id) { return document.getElementById(id); }
+  var s = { Q: $('sQ'), L: $('sL'), W: $('sW'), H: $('sH'), K: $('sK') };
+  var o = { Q: $('oQ'), L: $('oL'), W: $('oW'), H: $('oH'), K: $('oK') };
+  var r = { vol: $('rVol'), tw: $('rTw'), volKg: $('rVolKg'), type: $('rType') };
+  var verdict = $('verdict');
+  var fL = $('fL'), fR = $('fR'), fT = $('fT'), edges = $('edges'), gnd = $('gnd');
+
+  function fmt(n, d) { return OZ.dec(n.toFixed(d)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0'); }
+  function pts(a) { return a.map(function (q) { return q[0].toFixed(1) + ',' + q[1].toFixed(1); }).join(' '); }
+
+  function drawBox(L, Wd, Hh) {
+    var sc = 0.8, c = 0.866;
+    var ox = 200 + (Wd - L) * c * sc / 2, oy = 390;
+    function P(a, b, h) { return [ox + (a - b) * c * sc, oy - (a + b) * 0.5 * sc - h * sc]; }
+    var F = P(0, 0, 0), R = P(L, 0, 0), Lp = P(0, Wd, 0);
+    var F2 = P(0, 0, Hh), R2 = P(L, 0, Hh), L2 = P(0, Wd, Hh), B2 = P(L, Wd, Hh);
+    fR.setAttribute('points', pts([F, R, R2, F2]));
+    fL.setAttribute('points', pts([F, Lp, L2, F2]));
+    fT.setAttribute('points', pts([F2, R2, B2, L2]));
+    gnd.setAttribute('points', pts([P(-12, -12, 0), P(252, -12, 0), P(252, 252, 0), P(-12, 252, 0)]));
+    function mm(q) { return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }
+    edges.setAttribute('d', 'M' + mm(F) + 'L' + mm(R) + 'L' + mm(R2) + 'L' + mm(B2) + 'L' + mm(L2) + 'L' + mm(Lp) + 'Z M' + mm(F) + 'L' + mm(F2) + 'L' + mm(R2) + ' M' + mm(F2) + 'L' + mm(L2));
+  }
+
+  function calc() {
+    var Q = +s.Q.value, L = +s.L.value, Wd = +s.W.value, Hh = +s.H.value, K = +s.K.value;
+    o.Q.textContent = Q + OZ.t({ en: ' pcs', cz: ' ks' });
+    o.L.textContent = L + ' cm'; o.W.textContent = Wd + ' cm'; o.H.textContent = Hh + ' cm'; o.K.textContent = K + ' kg';
+    var m3 = Q * L * Wd * Hh / 1e6, total = Q * K, volKg = m3 * 167;
+    var pallet = (L >= 80 && Wd >= 60) || (L >= 60 && Wd >= 80);
+    r.vol.innerHTML = fmt(m3, 3) + ' <small>m\u00b3</small>';
+    r.tw.innerHTML = fmt(total, 1) + ' <small>kg</small>';
+    r.volKg.innerHTML = fmt(volKg, 1) + ' <small>kg</small>';
+    r.type.textContent = pallet ? OZ.t({ en: 'Pallet', cz: 'Paleta' }) : OZ.t({ en: 'Carton', cz: 'Karton' });
+    verdict.textContent = volKg > total
+      ? OZ.t({ en: 'The volumetric weight is higher than the actual weight.', cz: 'Objemová hmotnost je vyšší než skutečná.' })
+      : OZ.t({ en: 'The actual weight is higher than the volumetric weight.', cz: 'Skutečná hmotnost je vyšší než objemová.' });
+    drawBox(L, Wd, Hh);
+  }
+
+  ['Q', 'L', 'W', 'H', 'K'].forEach(function (key) { s[key].addEventListener('input', calc); });
+  OZ.on(calc);
+  calc();
+})();
+
+/* ---------- Contact ---------- */
+(function () {
+  var OZ = window.OZ, btn = document.getElementById('copyMail'), mail = 'zelik.ondrej@gmail.com', tm, flash = null;
+  function label() {
+    btn.textContent = flash === 'ok' ? OZ.t({ en: 'Copied', cz: 'E-mail zkopírován' }) : flash === 'fail' ? OZ.t({ en: 'Copy failed, use the link', cz: 'Kopírování se nezdařilo, použijte odkaz' }) : OZ.t({ en: 'Copy e-mail', cz: 'Kopírovat e-mail' });
+  }
+  function done(t) { flash = t; label(); clearTimeout(tm); tm = setTimeout(function () { flash = null; label(); }, 2200); }
+  btn.addEventListener('click', function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(mail).then(function () { done('ok'); }, function () { done('fail'); });
+    else done('fail');
+  });
+  OZ.on(label); label();
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
